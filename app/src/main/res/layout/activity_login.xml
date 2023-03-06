@@ -45,4 +45,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/clover_angle"/>
 
+    <Button
+        android:id="@+id/googleLoginButton"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:background="@drawable/square_white_radius_20"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:text="@string/google"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cloverImage"
+        app:layout_constraintBottom_toTopOf="@id/naverLoginButton"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+    <Button
+        android:id="@+id/naverLoginButton"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:background="@drawable/square_white_radius_20"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:text="@string/naver"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/googleLoginButton"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
