@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MindTravelApplication</string>
+    <string name="mind">Mind</string>
+    <string name="travel">Travel</string>
+</resources>
