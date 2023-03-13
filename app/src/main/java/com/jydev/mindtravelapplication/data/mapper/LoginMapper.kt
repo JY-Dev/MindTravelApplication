@@ -6,7 +6,7 @@ import com.jydev.mindtravelapplication.domain.model.Member
 import com.jydev.mindtravelapplication.domain.model.Token
 
 fun MemberResponse.toDomain() : Member{
-    return Member(email, nickname, profileImgUrl, role)
+    return Member(memberIdx,email, nickname, profileImgUrl, role)
 }
 
 fun TokenResponse.toDomain() : Token{
