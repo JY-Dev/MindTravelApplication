@@ -9,13 +9,9 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface MemberApi {
-    @POST("/login/oauth2/{socialLoginType}")
-    suspend fun socialLogin(
-        @Path("socialLoginType") socialLoginType: String,
-        @Header("Authorization") accessToken: String
-    ) : HttpResponse<TokenResponse>
 
-    @GET("/member")
+
+    @GET("/v1/member")
     suspend fun getMember(
         @Header("Authorization") accessToken: String
     ) : HttpResponse<MemberResponse>
