@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_64C279"
-    tools:context=".ui.StartActivity">
+    tools:context=".ui.start.StartActivity">
 
     <TextView
         android:id="@+id/mindText"
@@ -53,6 +53,7 @@
         android:textStyle="bold"
         android:textSize="24dp"
         android:text="@string/google"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cloverImage"
@@ -67,6 +68,7 @@
         android:textStyle="bold"
         android:textSize="24dp"
         android:text="@string/naver"
+        android:textColor="@color/black"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

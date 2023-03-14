@@ -5,4 +5,5 @@
     <string name="start_travel">여행시작</string>
     <string name="google">Google</string>
     <string name="naver">Naver</string>
+    <string name="please_input_nickname">닉네임을\n설정 해주세요!</string>
 </resources>

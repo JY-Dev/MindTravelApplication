@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,14 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingFactory: (LayoutInflate
         super.onDestroy()
         onDestroyLifeCycle()
         _binding = null
+    }
+
+    fun NetworkViewModel.observeData(){
+        errorMessage.observe(this@BaseActivity){
+            it.getContentIfNotHandled()?.let { message ->
+                Toast.makeText(this@BaseActivity,message,Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     open fun activityResultCallback(data : Intent){}

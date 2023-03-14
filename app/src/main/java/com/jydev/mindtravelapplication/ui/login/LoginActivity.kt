@@ -8,10 +8,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.jydev.mindtravelapplication.BuildConfig
+import com.jydev.mindtravelapplication.MainActivity
 import com.jydev.mindtravelapplication.base.BaseActivity
 import com.jydev.mindtravelapplication.data.model.login.SocialLoginRequest
 import com.jydev.mindtravelapplication.data.model.login.SocialLoginType
 import com.jydev.mindtravelapplication.databinding.ActivityLoginBinding
+import com.jydev.mindtravelapplication.ui.editnickname.EditNicknameActivity
+import com.jydev.mindtravelapplication.ui.login.LoginViewModel.*
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.OAuthLoginCallback
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,14 +38,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             startForResult.launch(signInIntent)
         }
         naverLoginButton.setOnClickListener {
-            loginViewModel.getMember()
-            //naverLogin()
+            naverLogin()
         }
     }
 
     private fun observeData(){
-        loginViewModel.member.observe(this){
-
+        loginViewModel.moveScreen.observe(this){
+            val intent : Intent = when(it){
+                is MoveScreen.MainScreen -> {
+                    Intent(this@LoginActivity, MainActivity::class.java)
+                }
+                is MoveScreen.EditNicknameScreen -> {
+                    Intent(this@LoginActivity,EditNicknameActivity::class.java)
+                }
+            }
+            startActivity(intent)
+            finish()
         }
     }
 

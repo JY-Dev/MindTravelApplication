@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_64C279"
+    tools:context=".ui.editnickname.EditNicknameActivity">
+
+    <ImageView
+        android:id="@+id/cloverImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:background="@drawable/clover"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/pleaseInputNicknameText"/>
+
+    <TextView
+        android:id="@+id/pleaseInputNicknameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="@string/please_input_nickname"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cloverImage"
+        app:layout_constraintBottom_toTopOf="@id/nicknameEditTextView"/>
+
+    <EditText
+        android:id="@+id/nicknameEditTextView"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:hint="닉네임을 입력해주세요"
+        android:textSize="14dp"
+        android:maxLength="16"
+        android:background="@drawable/square_white_radius_20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pleaseInputNicknameText"
+        app:layout_constraintBottom_toTopOf="@id/maxInputText"/>
+
+    <TextView
+        android:id="@+id/maxInputText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="최대 16글자까지 입력 가능합니다"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nicknameEditTextView"
+        app:layout_constraintBottom_toTopOf="@id/settingButton"/>
+
+    <Button
+        android:id="@+id/settingButton"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:text="설정"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/square_white_radius_20"
+        app:layout_constraintTop_toBottomOf="@id/maxInputText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
