@@ -1,3 +1,3 @@
 package com.jydev.mindtravelapplication.data.network.exception
 
-class TokenExpiredException : RuntimeException()
+class RetryRequestException : RuntimeException()

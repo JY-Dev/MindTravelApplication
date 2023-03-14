@@ -35,7 +35,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             startForResult.launch(signInIntent)
         }
         naverLoginButton.setOnClickListener {
-            naverLogin()
+            loginViewModel.getMember()
+            //naverLogin()
         }
     }
 
