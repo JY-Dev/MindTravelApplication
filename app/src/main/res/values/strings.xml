@@ -6,4 +6,6 @@
     <string name="google">Google</string>
     <string name="naver">Naver</string>
     <string name="please_input_nickname">닉네임을\n설정 해주세요!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

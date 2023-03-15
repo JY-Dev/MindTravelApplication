@@ -3,7 +3,7 @@ package com.jydev.mindtravelapplication.ui.editnickname
 import android.content.Intent
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.jydev.mindtravelapplication.MainActivity
+import com.jydev.mindtravelapplication.ui.main.MainActivity
 import com.jydev.mindtravelapplication.base.BaseActivity
 import com.jydev.mindtravelapplication.databinding.ActivityEditNicknameBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ class EditNicknameActivity : BaseActivity<ActivityEditNicknameBinding>(ActivityE
         viewModel.changeNickname.observe(this){
             it.getContentIfNotHandled()?.let {
                 intent.getStringExtra(WHERE_COME)?.let {
-                    startActivity(Intent(this,MainActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } ?: kotlin.run {
                     finish()

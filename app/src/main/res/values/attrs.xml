@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CertainColorTextView">
+        <attr name="certainTextColor" format="color" />
+        <attr name="certainText" format="string" />
+    </declare-styleable>
+</resources>

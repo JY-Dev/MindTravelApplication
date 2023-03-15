@@ -8,7 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.jydev.mindtravelapplication.BuildConfig
-import com.jydev.mindtravelapplication.MainActivity
+import com.jydev.mindtravelapplication.ui.main.MainActivity
 import com.jydev.mindtravelapplication.base.BaseActivity
 import com.jydev.mindtravelapplication.data.model.login.SocialLoginRequest
 import com.jydev.mindtravelapplication.data.model.login.SocialLoginType
