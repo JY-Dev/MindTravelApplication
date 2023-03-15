@@ -19,4 +19,11 @@ class MemberRepository @Inject constructor(
         return memberApi.getMember(loginPreference.getToken()?.accessToken ?: "")
             .getData(tokenRefreshManager::refreshToken).toDomain()
     }
+
+    suspend fun editNickname(nickname : String) : Member {
+        val member = memberApi.editNickname(loginPreference.getToken()?.accessToken ?: "",nickname)
+            .getData(tokenRefreshManager::refreshToken).toDomain()
+        loginPreference.saveMember(member)
+        return member
+    }
 }

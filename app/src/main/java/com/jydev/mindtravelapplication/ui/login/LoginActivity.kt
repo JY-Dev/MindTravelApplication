@@ -49,7 +49,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     Intent(this@LoginActivity, MainActivity::class.java)
                 }
                 is MoveScreen.EditNicknameScreen -> {
-                    Intent(this@LoginActivity,EditNicknameActivity::class.java)
+                    Intent(this@LoginActivity,EditNicknameActivity::class.java).apply {
+                        putExtra(EditNicknameActivity.WHERE_COME,"LoginActivity")
+                    }
                 }
             }
             startActivity(intent)

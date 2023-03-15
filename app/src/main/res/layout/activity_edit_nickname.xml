@@ -71,6 +71,7 @@
         android:layout_height="wrap_content"
         android:text="설정"
         android:textStyle="bold"
+        android:textSize="20dp"
         android:textColor="@color/black"
         android:layout_marginTop="40dp"
         android:background="@drawable/square_white_radius_20"
