@@ -43,6 +43,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     }
 
     private fun observeData(){
+        loginViewModel.observeError()
         loginViewModel.moveScreen.observe(this){
             val intent : Intent = when(it){
                 is MoveScreen.MainScreen -> {

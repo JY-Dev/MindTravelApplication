@@ -21,6 +21,7 @@ class TravelFragment : BaseFragment<FragmentTravelBinding>(FragmentTravelBinding
     }
 
     private fun observeData(){
+        travelViewModel.observeErrorHandling()
         travelViewModel.member.observe(viewLifecycleOwner){
             binding.nicknameTextView.text = "${it.nickname}님"
             calculateTravelDay(it.createdDate)

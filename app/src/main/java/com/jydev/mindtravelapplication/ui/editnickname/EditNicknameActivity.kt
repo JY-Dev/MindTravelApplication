@@ -17,6 +17,7 @@ class EditNicknameActivity : BaseActivity<ActivityEditNicknameBinding>(ActivityE
     }
 
     private fun observeData(){
+        viewModel.observeError()
         viewModel.changeNickname.observe(this){
             it.getContentIfNotHandled()?.let {
                 intent.getStringExtra(WHERE_COME)?.let {

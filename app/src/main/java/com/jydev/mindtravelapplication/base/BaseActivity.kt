@@ -33,7 +33,7 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingFactory: (LayoutInflate
         _binding = null
     }
 
-    fun NetworkViewModel.observeData(){
+    fun NetworkViewModel.observeError(){
         errorMessage.observe(this@BaseActivity){
             it.getContentIfNotHandled()?.let { message ->
                 Toast.makeText(this@BaseActivity,message,Toast.LENGTH_SHORT).show()
