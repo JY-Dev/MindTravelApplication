@@ -1,8 +1,10 @@
 package com.jydev.mindtravelapplication.ui.main.travel
 
+import android.content.Intent
 import androidx.fragment.app.viewModels
 import com.jydev.mindtravelapplication.base.BaseFragment
 import com.jydev.mindtravelapplication.databinding.FragmentTravelBinding
+import com.jydev.mindtravelapplication.ui.main.travel.record.RecordActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -13,6 +15,7 @@ import java.util.*
 class TravelFragment : BaseFragment<FragmentTravelBinding>(FragmentTravelBinding::inflate) {
     private val travelViewModel by viewModels<TravelViewModel>()
     override fun onViewCreateLifeCycle() {
+        binding.initView()
         travelViewModel.getMember()
         observeData()
     }
@@ -35,6 +38,8 @@ class TravelFragment : BaseFragment<FragmentTravelBinding>(FragmentTravelBinding
     }
 
     private fun FragmentTravelBinding.initView(){
-
+        recordButton.setOnClickListener {
+            startActivity(Intent(context,RecordActivity::class.java))
+        }
     }
 }
