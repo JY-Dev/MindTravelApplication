@@ -10,6 +10,9 @@ import com.jydev.mindtravelapplication.util.Event
 import kotlinx.coroutines.launch
 
 open class NetworkViewModel : ViewModel() {
+    private val _tokenExpired = MutableLiveData<Event<Unit>>()
+    val tokenExpired : LiveData<Event<Unit>>
+        get() = _tokenExpired
     private val _errorMessage = MutableLiveData<Event<String>>()
     val errorMessage : LiveData<Event<String>>
         get() = _errorMessage
@@ -24,15 +27,13 @@ open class NetworkViewModel : ViewModel() {
             } catch (e : Exception){
                 when(e){
                     is RefreshTokenExpiredException -> {
-                        println("토큰 만료")
+                        _tokenExpired.value = Event(Unit)
                     }
                     is RetryRequestException -> {
-                        println("재시도")
                         getApiResult(apiResult,success)
                     }
                     else -> {
                         e.message?.let{
-                            println("Error : $it")
                             _errorMessage.value = Event(it)
                         }
                     }

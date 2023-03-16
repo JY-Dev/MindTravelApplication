@@ -23,8 +23,9 @@ class LoginRepository @Inject constructor(
             socialLoginRequest.socialLoginType.socialType,
             "Bearer " + socialLoginRequest.accessToken
         ).getData().toDomain()
-        val member = memberApi.getMember(token.accessToken).getData(tokenRefreshManager::refreshToken)
-                .toDomain()
+        val member = memberApi.getMember(token.accessToken).getData(
+            tokenRefreshManager::refreshToken
+        ).toDomain()
         loginPreference.saveToken(token)
         loginPreference.saveMember(member)
         return member

@@ -17,12 +17,17 @@ class MemberRepository @Inject constructor(
 ) {
     suspend fun getMember(): Member {
         return memberApi.getMember(loginPreference.getToken()?.accessToken ?: "")
-            .getData(tokenRefreshManager::refreshToken).toDomain()
+            .getData(
+                tokenRefreshManager::refreshToken,
+                tokenRefreshManager::tokenExpired
+            ).toDomain()
     }
 
     suspend fun editNickname(nickname : String) : Member {
         val member = memberApi.editNickname(loginPreference.getToken()?.accessToken ?: "",nickname)
-            .getData(tokenRefreshManager::refreshToken).toDomain()
+            .getData(
+                tokenRefreshManager::refreshToken
+            ).toDomain()
         loginPreference.saveMember(member)
         return member
     }

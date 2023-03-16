@@ -8,7 +8,10 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.IntentCompat
 import androidx.viewbinding.ViewBinding
+import com.jydev.mindtravelapplication.ui.login.LoginActivity
+
 
 abstract class BaseActivity<VB : ViewBinding>(val bindingFactory: (LayoutInflater) -> VB) : AppCompatActivity() {
     private var _binding: VB? = null
@@ -34,6 +37,15 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingFactory: (LayoutInflate
     }
 
     fun NetworkViewModel.observeError(){
+        tokenExpired.observe(this@BaseActivity){
+            it.getContentIfNotHandled()?.let {
+                val intent = Intent(this@BaseActivity,LoginActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                }
+                Toast.makeText(this@BaseActivity,"로그인 정보가 만료되었습니다.",Toast.LENGTH_LONG).show()
+                startActivity(intent)
+            }
+        }
         errorMessage.observe(this@BaseActivity){
             it.getContentIfNotHandled()?.let { message ->
                 Toast.makeText(this@BaseActivity,message,Toast.LENGTH_SHORT).show()
