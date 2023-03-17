@@ -14,9 +14,9 @@ class RecordViewModel @Inject constructor(private val mindTravelRepository : Min
     private val _recordComplete = MutableLiveData<Event<Unit>>()
     val recordComplete : LiveData<Event<Unit>>
         get() = _recordComplete
-    fun recordFeeling(recordRequest: RecordRequest){
+    fun recordMood(recordRequest: RecordRequest){
         getApiResult({
-            mindTravelRepository.recordFeeling(recordRequest)
+            mindTravelRepository.recordMood(recordRequest)
         }){
             _recordComplete.value = Event(Unit)
         }

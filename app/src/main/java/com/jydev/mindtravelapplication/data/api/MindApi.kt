@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface MindApi {
     @POST("/v1/mind/travel/record-feeling")
-    suspend fun recordFeeling(
+    suspend fun recordMood(
         @Header("Authorization") accessToken: String,
         @Body recordRequest: RecordRequest
     ) : Response<HttpResponse<Unit>>

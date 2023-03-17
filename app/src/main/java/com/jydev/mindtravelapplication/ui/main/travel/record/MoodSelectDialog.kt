@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.jydev.mindtravelapplication.databinding.DialogSelectFeelingBinding
-import com.jydev.mindtravelapplication.domain.model.Feeling
+import com.jydev.mindtravelapplication.domain.model.Mood
 
-class FeelingSelectDialog : DialogFragment() {
+class MoodSelectDialog : DialogFragment() {
     private var _binding : DialogSelectFeelingBinding? = null
     private val binding :DialogSelectFeelingBinding
         get() = _binding!!
@@ -38,7 +38,7 @@ class FeelingSelectDialog : DialogFragment() {
                 normalRadioButton.id -> 2
                 else -> 3
             }
-            listener.selectFeeling(Feeling.getFeeling(index))
+            listener.selectFeeling(Mood.getFeeling(index))
         }
     }
 
@@ -61,6 +61,6 @@ class FeelingSelectDialog : DialogFragment() {
     }
 
     interface FeelingSelect{
-        fun selectFeeling(feeling: Feeling)
+        fun selectFeeling(mood: Mood)
     }
 }

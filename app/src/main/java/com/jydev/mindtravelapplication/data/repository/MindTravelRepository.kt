@@ -14,9 +14,9 @@ class MindTravelRepository @Inject constructor(
     private val tokenRefreshManager: TokenRefreshManager,
     private val loginPreference: LoginPreference
 ) {
-    suspend fun recordFeeling(recordRequest: RecordRequest) {
+    suspend fun recordMood(recordRequest: RecordRequest) {
         val accessToken = loginPreference.getToken()?.accessToken?:""
-        mindApi.recordFeeling(accessToken,recordRequest).getData(
+        mindApi.recordMood(accessToken,recordRequest).getData(
             tokenRefreshManager::refreshToken
         )
     }

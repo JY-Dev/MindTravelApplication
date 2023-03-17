@@ -7,14 +7,14 @@ import androidx.activity.viewModels
 import com.jydev.mindtravelapplication.base.BaseActivity
 import com.jydev.mindtravelapplication.data.model.RecordRequest
 import com.jydev.mindtravelapplication.databinding.ActivityRecordBinding
-import com.jydev.mindtravelapplication.domain.model.Feeling
+import com.jydev.mindtravelapplication.domain.model.Mood
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RecordActivity : BaseActivity<ActivityRecordBinding>(ActivityRecordBinding::inflate), FeelingSelectDialog.FeelingSelect {
+class RecordActivity : BaseActivity<ActivityRecordBinding>(ActivityRecordBinding::inflate), MoodSelectDialog.FeelingSelect {
     private val recordViewModel by viewModels<RecordViewModel>()
-    private val feelingDialog : FeelingSelectDialog by lazy {
-        FeelingSelectDialog()
+    private val moodDialog : MoodSelectDialog by lazy {
+        MoodSelectDialog()
     }
     override fun onCreateLifeCycle() {
         binding.initView()
@@ -25,7 +25,7 @@ class RecordActivity : BaseActivity<ActivityRecordBinding>(ActivityRecordBinding
         recordViewModel.observeError()
         recordViewModel.recordComplete.observe(this){
             it.getContentIfNotHandled()?.let {
-                feelingDialog.dismiss()
+                moodDialog.dismiss()
                 finish()
             }
         }
@@ -44,15 +44,15 @@ class RecordActivity : BaseActivity<ActivityRecordBinding>(ActivityRecordBinding
         }
         recordButton.setOnClickListener {
             if(recordEditText.text.isNotEmpty()){
-                feelingDialog.show(supportFragmentManager,"")
+                moodDialog.show(supportFragmentManager,"")
             }
             else
                 Toast.makeText(this@RecordActivity,"내용을 입력해 주세요!",Toast.LENGTH_SHORT).show()
         }
     }
 
-    override fun selectFeeling(feeling: Feeling) {
+    override fun selectFeeling(mood: Mood) {
         val content = binding.recordEditText.text.toString()
-        recordViewModel.recordFeeling(RecordRequest(content,feeling))
+        recordViewModel.recordMood(RecordRequest(content,mood))
     }
 }
