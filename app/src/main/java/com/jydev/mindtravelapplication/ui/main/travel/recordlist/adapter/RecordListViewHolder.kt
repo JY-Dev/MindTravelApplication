@@ -10,7 +10,7 @@ class RecordListViewHolder(
     private val gotoDetail: (MoodRecord) -> Unit
 ) :
     RecyclerView.ViewHolder(binding.root) {
-    private val timeFormat = DateTimeFormatter.ofPattern("hh:mm")
+    private val timeFormat = DateTimeFormatter.ofPattern("HH:mm")
     fun bind(item: MoodRecord) {
         with(binding) {
             timeTextView.text = item.createdDate.format(timeFormat)

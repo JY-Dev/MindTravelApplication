@@ -27,9 +27,14 @@ class RecordListActivity :
             })
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        updateDate()
+    }
+
     override fun onCreateLifeCycle() {
         binding.initView()
-        updateDate()
         observeData()
     }
 

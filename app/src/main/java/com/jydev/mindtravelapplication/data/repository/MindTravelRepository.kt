@@ -33,4 +33,12 @@ class MindTravelRepository @Inject constructor(
             it.toDomain()
         }
     }
+
+    suspend fun deleteRecord(recordId: Long) {
+        val accessToken = loginPreference.getToken()?.accessToken ?: ""
+        mindApi.deleteRecordMood(accessToken, recordId)
+            .getData(
+                tokenRefreshManager::refreshToken
+            )
+    }
 }

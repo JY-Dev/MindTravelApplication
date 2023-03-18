@@ -17,8 +17,12 @@ class TravelFragment : BaseFragment<FragmentTravelBinding>(FragmentTravelBinding
     private val travelViewModel by viewModels<TravelViewModel>()
     override fun onViewCreateLifeCycle() {
         binding.initView()
-        travelViewModel.getMember()
         observeData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        travelViewModel.getMember()
     }
 
     private fun observeData(){
