@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jydev.mindtravelapplication.databinding.ItemRecordListBinding
 import com.jydev.mindtravelapplication.domain.model.MoodRecord
 
-class RecordListAdapter : RecyclerView.Adapter<RecordListViewHolder>() {
+class RecordListAdapter(private val gotoDetail : (MoodRecord) -> Unit) : RecyclerView.Adapter<RecordListViewHolder>() {
     private var list = listOf<MoodRecord>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordListViewHolder {
         return RecordListViewHolder(
@@ -15,7 +15,8 @@ class RecordListAdapter : RecyclerView.Adapter<RecordListViewHolder>() {
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            gotoDetail
         )
     }
 

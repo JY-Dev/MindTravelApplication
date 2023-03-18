@@ -2,11 +2,13 @@ package com.jydev.mindtravelapplication.ui.main.travel.recordlist
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.content.Intent
 import android.view.View
 import android.widget.DatePicker
 import androidx.activity.viewModels
 import com.jydev.mindtravelapplication.base.BaseActivity
 import com.jydev.mindtravelapplication.databinding.ActivityRecordListBinding
+import com.jydev.mindtravelapplication.ui.main.travel.recorddetail.RecordDetailActivity
 import com.jydev.mindtravelapplication.ui.main.travel.recordlist.adapter.RecordListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
@@ -19,7 +21,11 @@ class RecordListActivity :
     private val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     private val recordListViewModel by viewModels<RecordListViewModel>()
     private val recordListAdapter by lazy {
-        RecordListAdapter()
+        RecordListAdapter {
+            startActivity(Intent(this,RecordDetailActivity::class.java).apply {
+                putExtra(RecordDetailActivity.RECORD_DETAIL,it)
+            })
+        }
     }
     override fun onCreateLifeCycle() {
         binding.initView()

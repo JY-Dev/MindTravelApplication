@@ -1,5 +1,13 @@
 package com.jydev.mindtravelapplication.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
 
-data class MoodRecord(val content : String ,val mood : Mood, val createdDate : LocalDateTime)
+@Parcelize
+data class MoodRecord(
+    val id: Long,
+    val content: String,
+    val mood: Mood,
+    val createdDate: LocalDateTime
+) : Parcelable

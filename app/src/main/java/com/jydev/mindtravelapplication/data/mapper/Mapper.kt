@@ -17,5 +17,5 @@ fun TokenResponse.toDomain() : Token{
 }
 
 fun MoodRecordResponse.toDomain() : MoodRecord{
-    return MoodRecord(content, mood, LocalDateTime.parse(createdDate))
+    return MoodRecord(moodRecordId,content, mood, LocalDateTime.parse(createdDate))
 }
