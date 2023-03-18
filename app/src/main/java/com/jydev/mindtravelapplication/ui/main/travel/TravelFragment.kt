@@ -5,6 +5,7 @@ import androidx.fragment.app.viewModels
 import com.jydev.mindtravelapplication.base.BaseFragment
 import com.jydev.mindtravelapplication.databinding.FragmentTravelBinding
 import com.jydev.mindtravelapplication.ui.main.travel.record.RecordActivity
+import com.jydev.mindtravelapplication.ui.main.travel.recordlist.RecordListActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -41,6 +42,9 @@ class TravelFragment : BaseFragment<FragmentTravelBinding>(FragmentTravelBinding
     private fun FragmentTravelBinding.initView(){
         recordButton.setOnClickListener {
             startActivity(Intent(context,RecordActivity::class.java))
+        }
+        travelListButton.setOnClickListener {
+            startActivity(Intent(context,RecordListActivity::class.java))
         }
     }
 }

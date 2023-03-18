@@ -1,5 +1,6 @@
 package com.jydev.mindtravelapplication.base
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,6 +26,7 @@ open class NetworkViewModel : ViewModel() {
             try {
                 success(apiResult())
             } catch (e : Exception){
+                e.printStackTrace()
                 when(e){
                     is RefreshTokenExpiredException -> {
                         _tokenExpired.value = Event(Unit)
