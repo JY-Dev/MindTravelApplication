@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="제목입니다.!!!!!!!!"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/nicknameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#828282"
+        android:text="닉네임"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/dateTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#828282"
+        android:layout_marginStart="8dp"
+        android:text="2018:03:02"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/nicknameTextView"
+        app:layout_constraintBottom_toBottomOf="@id/nicknameTextView"
+        app:layout_constraintStart_toEndOf="@id/nicknameTextView"/>
+
+    <TextView
+        android:id="@+id/viewText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#828282"
+        android:layout_marginStart="8dp"
+        android:text="조회"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/dateTimeTextView"
+        app:layout_constraintBottom_toBottomOf="@id/dateTimeTextView"
+        app:layout_constraintStart_toEndOf="@id/dateTimeTextView"/>
+
+    <TextView
+        android:id="@+id/viewCountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#828282"
+        android:layout_marginStart="4dp"
+        android:text="24"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/viewText"
+        app:layout_constraintBottom_toBottomOf="@id/viewText"
+        app:layout_constraintStart_toEndOf="@id/viewText"/>
+
+    <TextView
+        android:id="@+id/likeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#828282"
+        android:layout_marginStart="8dp"
+        android:text="좋아요"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/viewCountText"
+        app:layout_constraintBottom_toBottomOf="@id/viewCountText"
+        app:layout_constraintStart_toEndOf="@id/viewCountText"/>
+
+    <TextView
+        android:id="@+id/likeCountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="#828282"
+        android:layout_marginStart="4dp"
+        android:text="24"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/likeText"
+        app:layout_constraintBottom_toBottomOf="@id/likeText"
+        app:layout_constraintStart_toEndOf="@id/likeText"/>
+
+    <View
+        android:id="@+id/commentBox"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/square_828282_radius_20"
+        app:layout_constraintTop_toTopOf="@id/titleTextView"
+        app:layout_constraintBottom_toBottomOf="@id/nicknameTextView"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/commentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="댓글"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="@id/commentBox"
+        app:layout_constraintBottom_toTopOf="@id/commentCountText"
+        app:layout_constraintStart_toStartOf="@id/commentBox"
+        app:layout_constraintEnd_toEndOf="@id/commentBox"/>
+
+    <TextView
+        android:id="@+id/commentCountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/commentText"
+        app:layout_constraintBottom_toBottomOf="@id/commentBox"
+        app:layout_constraintStart_toStartOf="@id/commentBox"
+        app:layout_constraintEnd_toEndOf="@id/commentBox"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#828282"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/nicknameTextView"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
