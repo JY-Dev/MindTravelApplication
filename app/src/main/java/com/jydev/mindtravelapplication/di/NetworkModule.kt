@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val BASE_URL = "http://192.168.1.5:8080"
+    private const val BASE_URL = "http://192.168.0.7:8080"
     @Provides
     @Singleton
     fun providePicSumGalleryRetrofit(client : OkHttpClient) : Retrofit =

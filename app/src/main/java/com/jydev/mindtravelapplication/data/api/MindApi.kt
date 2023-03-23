@@ -1,6 +1,7 @@
 package com.jydev.mindtravelapplication.data.api
 
 import com.jydev.mindtravelapplication.data.model.HttpResponse
+import com.jydev.mindtravelapplication.data.model.MindSharePostRequest
 import com.jydev.mindtravelapplication.data.model.MoodRecordResponse
 import com.jydev.mindtravelapplication.data.model.RecordRequest
 import retrofit2.Response
@@ -25,4 +26,10 @@ interface MindApi {
         @Header("Authorization") accessToken: String,
         @Query("date") date : String
     ) : Response<HttpResponse<List<MoodRecordResponse>>>
+
+    @POST("/v1/mind/share/post")
+    suspend fun postMindSharePost(
+        @Header("Authorization") accessToken: String,
+        @Body mindSharePostRequest: MindSharePostRequest
+    ) : Response<HttpResponse<Unit>>
 }

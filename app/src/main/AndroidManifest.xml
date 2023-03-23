@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".PostWriteActivity"
+            android:name=".ui.main.mindshare.post.write.MindSharePostWriteActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.travel.recorddetail.RecordDetailActivity"
