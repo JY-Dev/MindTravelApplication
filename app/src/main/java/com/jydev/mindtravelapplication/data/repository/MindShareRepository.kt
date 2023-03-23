@@ -1,10 +1,13 @@
 package com.jydev.mindtravelapplication.data.repository
 
 import com.jydev.mindtravelapplication.data.api.MindApi
+import com.jydev.mindtravelapplication.data.mapper.toDomain
 import com.jydev.mindtravelapplication.data.model.MindSharePostRequest
+import com.jydev.mindtravelapplication.data.model.MindSharePostsRequest
 import com.jydev.mindtravelapplication.data.network.TokenRefreshManager
 import com.jydev.mindtravelapplication.data.network.getData
 import com.jydev.mindtravelapplication.data.preference.LoginPreference
+import com.jydev.mindtravelapplication.domain.model.MindSharePosts
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,5 +22,12 @@ class MindShareRepository @Inject constructor(
             loginPreference.getToken()?.accessToken?:"",
             request
         ).getData(tokenRefreshManager::refreshToken)
+    }
+
+    suspend fun fetchMindSharePosts(request: MindSharePostsRequest) : MindSharePosts{
+       return mindApi.fetchMindSharePosts(
+            loginPreference.getToken()?.accessToken?:"",
+            request
+        ).getData(tokenRefreshManager::refreshToken).toDomain()
     }
 }

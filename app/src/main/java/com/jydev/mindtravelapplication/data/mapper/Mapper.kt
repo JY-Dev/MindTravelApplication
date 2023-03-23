@@ -1,11 +1,7 @@
 package com.jydev.mindtravelapplication.data.mapper
 
-import com.jydev.mindtravelapplication.data.model.MemberResponse
-import com.jydev.mindtravelapplication.data.model.MoodRecordResponse
-import com.jydev.mindtravelapplication.data.model.TokenResponse
-import com.jydev.mindtravelapplication.domain.model.Member
-import com.jydev.mindtravelapplication.domain.model.MoodRecord
-import com.jydev.mindtravelapplication.domain.model.Token
+import com.jydev.mindtravelapplication.data.model.*
+import com.jydev.mindtravelapplication.domain.model.*
 import java.time.LocalDateTime
 
 fun MemberResponse.toDomain() : Member{
@@ -18,4 +14,12 @@ fun TokenResponse.toDomain() : Token{
 
 fun MoodRecordResponse.toDomain() : MoodRecord{
     return MoodRecord(moodRecordId,content, mood, LocalDateTime.parse(createdDate))
+}
+
+fun MindSharePostResponse.toDomain() : MindSharePost{
+    return MindSharePost(nickname,title,content,likeCount,viewCount,LocalDateTime.parse(createdDate))
+}
+
+fun MindSharePostsResponse.toDomain() : MindSharePosts{
+    return MindSharePosts(posts.map { it.toDomain() },totalSize)
 }

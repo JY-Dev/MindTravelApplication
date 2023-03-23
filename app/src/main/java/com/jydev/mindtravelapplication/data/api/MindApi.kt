@@ -1,9 +1,6 @@
 package com.jydev.mindtravelapplication.data.api
 
-import com.jydev.mindtravelapplication.data.model.HttpResponse
-import com.jydev.mindtravelapplication.data.model.MindSharePostRequest
-import com.jydev.mindtravelapplication.data.model.MoodRecordResponse
-import com.jydev.mindtravelapplication.data.model.RecordRequest
+import com.jydev.mindtravelapplication.data.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -32,4 +29,10 @@ interface MindApi {
         @Header("Authorization") accessToken: String,
         @Body mindSharePostRequest: MindSharePostRequest
     ) : Response<HttpResponse<Unit>>
+
+    @GET("/v1/mind/share/post")
+    suspend fun fetchMindSharePosts(
+        @Header("Authorization") accessToken: String,
+        @Body mindSharePostsRequest: MindSharePostsRequest
+    ) : Response<HttpResponse<MindSharePostsResponse>>
 }
