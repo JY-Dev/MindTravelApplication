@@ -1,5 +1,7 @@
 package com.jydev.mindtravelapplication.ui.main.mindshare.post.write
 
+import android.app.Activity
+import android.content.Intent
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -21,6 +23,7 @@ class MindSharePostWriteActivity : BaseActivity<ActivityMindSharePostWriteBindin
         viewModel.observeError()
         viewModel.completePost.observe(this){
             it.getContentIfNotHandled()?.let {
+                setResult(Activity.RESULT_OK, Intent())
                 finish()
             }
         }

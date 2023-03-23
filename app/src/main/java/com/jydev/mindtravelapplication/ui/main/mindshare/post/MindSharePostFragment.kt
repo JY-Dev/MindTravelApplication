@@ -7,6 +7,7 @@ import com.jydev.mindtravelapplication.base.BaseFragment
 import com.jydev.mindtravelapplication.data.model.MindSharePostsRequest
 import com.jydev.mindtravelapplication.databinding.FragmentMindSharePostBinding
 import com.jydev.mindtravelapplication.domain.model.MindSharePostCategory
+import com.jydev.mindtravelapplication.ui.main.mindshare.MindShareViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 class MindSharePostFragment private constructor() :
     BaseFragment<FragmentMindSharePostBinding>(FragmentMindSharePostBinding::inflate) {
     private val viewModel by viewModels<MindSharePostViewModel>()
-
+    private val mindShareViewModel by viewModels<MindShareViewModel>({requireParentFragment()})
     private val adapter by lazy {
         MindSharePostAdapter {
 
@@ -39,6 +40,9 @@ class MindSharePostFragment private constructor() :
             CoroutineScope(Dispatchers.Main).launch {
                 adapter.submitData(it)
             }
+        }
+        mindShareViewModel.postEvent.observe(viewLifecycleOwner){
+            adapter.refresh()
         }
     }
 
