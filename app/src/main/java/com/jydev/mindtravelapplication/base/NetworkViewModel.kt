@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.jydev.mindtravelapplication.data.network.exception.RefreshTokenExpiredException
 import com.jydev.mindtravelapplication.data.network.exception.RetryRequestException
 import com.jydev.mindtravelapplication.util.Event
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 open class NetworkViewModel : ViewModel() {
@@ -26,19 +28,31 @@ open class NetworkViewModel : ViewModel() {
             try {
                 success(apiResult())
             } catch (e : Exception){
-                e.printStackTrace()
-                when(e){
-                    is RefreshTokenExpiredException -> {
-                        _tokenExpired.value = Event(Unit)
-                    }
-                    is RetryRequestException -> {
-                        getApiResult(apiResult,success)
-                    }
-                    else -> {
-                        e.message?.let{
-                            _errorMessage.value = Event(it)
-                        }
-                    }
+                errorHandling(e){
+                    getApiResult(apiResult,success)
+                }
+            }
+        }
+    }
+
+    fun <T> Flow<T>.flowErrorHandling() : Flow<T>{
+        return this.catch {
+            errorHandling(it)
+        }
+    }
+
+    private fun errorHandling(e : Throwable, retry : (() -> Unit)? = null){
+        e.printStackTrace()
+        when(e){
+            is RefreshTokenExpiredException -> {
+                _tokenExpired.value = Event(Unit)
+            }
+            is RetryRequestException -> {
+                retry?.invoke()
+            }
+            else -> {
+                e.message?.let{
+                    _errorMessage.value = Event(it)
                 }
             }
         }

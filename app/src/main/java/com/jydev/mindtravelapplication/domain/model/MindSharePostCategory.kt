@@ -1,5 +1,9 @@
 package com.jydev.mindtravelapplication.domain.model
 
-enum class MindSharePostCategory {
-    TROUBLE_COUNSELING,DAILY
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+enum class MindSharePostCategory(val text : String) : Parcelable {
+    TROUBLE_COUNSELING("고민상담"),DAILY("일상")
 }

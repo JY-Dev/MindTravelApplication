@@ -1,6 +1,7 @@
 package com.jydev.mindtravelapplication.ui.main
 
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.jydev.mindtravelapplication.R
 import com.jydev.mindtravelapplication.base.BaseActivity
 import com.jydev.mindtravelapplication.databinding.ActivityMainBinding
@@ -10,26 +11,32 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
-    private val fragmentList = arrayListOf(TravelFragment(),MindShareFragment())
+    private val pagerAdapter by lazy {
+        MainViewPagerAdapter(this)
+    }
     override fun onCreateLifeCycle() {
         binding.initView()
     }
 
     private fun ActivityMainBinding.initView(){
-        changeFragment(fragmentList[0])
+        viewPager.adapter = pagerAdapter
         navigation.setOnItemSelectedListener{
-            val fragment = when(it.itemId){
-                R.id.action_travel -> fragmentList[0]
-                else -> fragmentList[1]
+            when(it.itemId){
+                R.id.action_travel -> viewPager.currentItem = 0
+                else -> viewPager.currentItem = 1
             }
-            changeFragment(fragment)
             true
         }
+        viewPager.isUserInputEnabled = false
+        viewPager.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback() {
+
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    navigation.menu.getItem(position).isChecked = true
+                }
+            }
+        )
     }
 
-    private fun changeFragment(fragment : Fragment){
-        val beginTransaction = supportFragmentManager.beginTransaction()
-        beginTransaction.replace(binding.fragment.id,fragment)
-        beginTransaction.commit()
-    }
 }

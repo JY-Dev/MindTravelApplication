@@ -17,7 +17,7 @@ fun MoodRecordResponse.toDomain() : MoodRecord{
 }
 
 fun MindSharePostResponse.toDomain() : MindSharePost{
-    return MindSharePost(nickname,title,content,likeCount,viewCount,LocalDateTime.parse(createdDate))
+    return MindSharePost(postId,nickname,title,likeCount,viewCount,LocalDateTime.parse(createdDate))
 }
 
 fun MindSharePostsResponse.toDomain() : MindSharePosts{

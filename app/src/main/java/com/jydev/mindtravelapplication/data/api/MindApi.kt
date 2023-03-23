@@ -1,6 +1,7 @@
 package com.jydev.mindtravelapplication.data.api
 
 import com.jydev.mindtravelapplication.data.model.*
+import com.jydev.mindtravelapplication.domain.model.MindSharePostCategory
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -33,6 +34,8 @@ interface MindApi {
     @GET("/v1/mind/share/post")
     suspend fun fetchMindSharePosts(
         @Header("Authorization") accessToken: String,
-        @Body mindSharePostsRequest: MindSharePostsRequest
+        @Query("pageOffset") pageOffset : Long,
+        @Query("pageSize") pageSize : Int,
+        @Query("category") category: MindSharePostCategory
     ) : Response<HttpResponse<MindSharePostsResponse>>
 }
