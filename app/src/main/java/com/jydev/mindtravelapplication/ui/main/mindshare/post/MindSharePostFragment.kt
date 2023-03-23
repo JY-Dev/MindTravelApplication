@@ -32,6 +32,10 @@ class MindSharePostFragment private constructor() :
 
     private fun FragmentMindSharePostBinding.initView() {
         postRecyclerview.adapter = adapter
+        swipeLayout.setOnRefreshListener {
+            adapter.refresh()
+            swipeLayout.isRefreshing = false
+        }
     }
 
     private fun observeData() {
