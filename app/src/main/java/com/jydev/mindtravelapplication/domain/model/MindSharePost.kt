@@ -8,5 +8,6 @@ data class MindSharePost(
     val title: String,
     val likeCount: Long,
     val viewCount: Long,
+    val commentCount : Long,
     val createdDate: LocalDateTime
 )
