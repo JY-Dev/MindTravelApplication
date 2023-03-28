@@ -20,10 +20,9 @@ interface MemberApi {
         @Header("Authorization") accessToken: String
     ) : Response<HttpResponse<MemberResponse>>
 
-    @PATCH("/v1/member/nickname")
-    @FormUrlEncoded
+    @PATCH("/v1/member/{nickname}")
     suspend fun editNickname(
         @Header("Authorization") accessToken: String,
-        @Field("nickname") nickname : String
+        @Path("nickname") nickname : String
     ) : Response<HttpResponse<MemberResponse>>
 }

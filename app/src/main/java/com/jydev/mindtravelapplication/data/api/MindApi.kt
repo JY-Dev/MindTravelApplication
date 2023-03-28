@@ -13,10 +13,10 @@ interface MindApi {
     ) : Response<HttpResponse<Unit>>
 
     @FormUrlEncoded
-    @HTTP(method="DELETE", hasBody=true, path = "/v1/mind/travel/record-mood")
+    @DELETE("/v1/mind/travel/record-mood/{moodRecordId}")
     suspend fun deleteRecordMood(
         @Header("Authorization") accessToken: String,
-        @Field("moodRecordId") recordId : Long
+        @Path("moodRecordId") recordId : Long
     ) : Response<HttpResponse<Unit>>
 
     @GET("/v1/mind/travel/record-moods")
