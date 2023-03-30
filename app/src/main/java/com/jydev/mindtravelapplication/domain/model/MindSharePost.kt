@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 data class MindSharePost(
     val postId : Long,
-    val nickname: String,
+    val member: Member,
     val title: String,
     val likeCount: Long,
     val viewCount: Long,

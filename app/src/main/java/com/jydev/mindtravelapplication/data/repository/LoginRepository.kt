@@ -7,7 +7,7 @@ import com.jydev.mindtravelapplication.data.model.login.SocialLoginRequest
 import com.jydev.mindtravelapplication.data.network.TokenRefreshManager
 import com.jydev.mindtravelapplication.data.network.getData
 import com.jydev.mindtravelapplication.data.preference.LoginPreference
-import com.jydev.mindtravelapplication.domain.model.Member
+import com.jydev.mindtravelapplication.domain.model.MemberLogin
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,7 +18,7 @@ class LoginRepository @Inject constructor(
     private val tokenRefreshManager: TokenRefreshManager,
     private val loginPreference: LoginPreference
 ) {
-    suspend fun socialLogin(socialLoginRequest: SocialLoginRequest): Member {
+    suspend fun socialLogin(socialLoginRequest: SocialLoginRequest): MemberLogin {
         val token = authApi.socialLogin(
             socialLoginRequest.socialLoginType.socialType,
             "Bearer " + socialLoginRequest.accessToken

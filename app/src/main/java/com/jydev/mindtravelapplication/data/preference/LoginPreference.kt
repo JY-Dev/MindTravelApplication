@@ -2,7 +2,7 @@ package com.jydev.mindtravelapplication.data.preference
 
 import android.content.Context
 import com.google.gson.Gson
-import com.jydev.mindtravelapplication.domain.model.Member
+import com.jydev.mindtravelapplication.domain.model.MemberLogin
 import com.jydev.mindtravelapplication.domain.model.Token
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -31,17 +31,17 @@ class LoginPreference @Inject constructor(
         }
     }
 
-    fun saveMember(member : Member){
-        val tokenJson = gson.toJson(member)
+    fun saveMember(memberLogin : MemberLogin){
+        val tokenJson = gson.toJson(memberLogin)
         sharedPref.edit()
             .putString(MEMBER,tokenJson)
             .apply()
     }
 
-    fun getMember() : Member?{
+    fun getMember() : MemberLogin?{
         val memberJson = sharedPref.getString(MEMBER,null)
         memberJson?.let {
-            return gson.fromJson(it,Member::class.java)
+            return gson.fromJson(it,MemberLogin::class.java)
         } ?: run {
             return null
         }

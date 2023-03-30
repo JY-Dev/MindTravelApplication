@@ -38,4 +38,10 @@ interface MindApi {
         @Query("pageSize") pageSize : Int,
         @Query("category") category: MindSharePostCategory
     ) : Response<HttpResponse<MindSharePostsResponse>>
+
+    @GET("/v1/mind/share/post/{postId}")
+    suspend fun fetchMindSharePostDetail(
+        @Header("Authorization") accessToken: String,
+        @Path("postId") postId : Long
+    ) : Response<HttpResponse<MindSharePostDetailResponse>>
 }

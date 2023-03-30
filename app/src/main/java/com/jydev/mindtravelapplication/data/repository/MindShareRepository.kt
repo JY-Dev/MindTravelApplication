@@ -11,6 +11,7 @@ import com.jydev.mindtravelapplication.data.network.TokenRefreshManager
 import com.jydev.mindtravelapplication.data.network.getData
 import com.jydev.mindtravelapplication.data.preference.LoginPreference
 import com.jydev.mindtravelapplication.domain.model.MindSharePost
+import com.jydev.mindtravelapplication.domain.model.MindSharePostDetail
 import com.jydev.mindtravelapplication.domain.model.MindSharePosts
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -28,6 +29,13 @@ class MindShareRepository @Inject constructor(
             loginPreference.getToken()?.accessToken?:"",
             request
         ).getData(tokenRefreshManager::refreshToken)
+    }
+
+    suspend fun fetchMindSharePost(postId : Long) : MindSharePostDetail{
+        return mindApi.fetchMindSharePostDetail(
+            loginPreference.getToken()?.accessToken?:"",
+            postId
+        ).getData(tokenRefreshManager::refreshToken).toDomain()
     }
 
     fun fetchMindSharePosts(request: MindSharePostsRequest) : Flow<PagingData<MindSharePost>>{

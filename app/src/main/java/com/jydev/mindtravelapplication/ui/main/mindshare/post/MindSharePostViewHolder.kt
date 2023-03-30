@@ -13,7 +13,7 @@ class MindSharePostViewHolder(private val onClick : (postId : Long) -> Unit,priv
     fun bind(item: MindSharePost?) {
         item?.let {
             with(binding) {
-                nicknameTextView.text = item.nickname
+                nicknameTextView.text = item.member.nickname
                 viewCountTextView.text = item.viewCount.toString()
                 likeCountTextView.text = item.likeCount.toString()
                 commentCountTextView.text = item.commentCount.toString()

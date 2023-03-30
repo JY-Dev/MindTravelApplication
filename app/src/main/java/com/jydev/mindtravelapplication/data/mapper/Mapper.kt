@@ -4,22 +4,66 @@ import com.jydev.mindtravelapplication.data.model.*
 import com.jydev.mindtravelapplication.domain.model.*
 import java.time.LocalDateTime
 
-fun MemberResponse.toDomain() : Member{
-    return Member(memberIdx,email, nickname, profileImgUrl,createdDate, role)
+fun MemberLoginResponse.toDomain(): MemberLogin {
+    return MemberLogin(memberIdx, email, nickname, profileImgUrl, createdDate, role)
 }
 
-fun TokenResponse.toDomain() : Token{
+fun TokenResponse.toDomain(): Token {
     return Token("Bearer $accessToken", "Bearer $refreshToken")
 }
 
-fun MoodRecordResponse.toDomain() : MoodRecord{
-    return MoodRecord(moodRecordId,content, mood, LocalDateTime.parse(createdDate))
+fun MoodRecordResponse.toDomain(): MoodRecord {
+    return MoodRecord(moodRecordId, content, mood, LocalDateTime.parse(createdDate))
 }
 
-fun MindSharePostResponse.toDomain() : MindSharePost{
-    return MindSharePost(postId,nickname,title,likeCount,viewCount,commentCount,LocalDateTime.parse(createdDate))
+fun MindSharePostResponse.toDomain(): MindSharePost {
+    return MindSharePost(
+        postId,
+        member.toDomain(),
+        title,
+        likeCount,
+        viewCount,
+        commentCount,
+        LocalDateTime.parse(createdDate)
+    )
 }
 
-fun MindSharePostsResponse.toDomain() : MindSharePosts{
-    return MindSharePosts(posts.map { it.toDomain() },totalSize)
+fun MindSharePostsResponse.toDomain(): MindSharePosts {
+    return MindSharePosts(posts.map { it.toDomain() }, totalSize)
+}
+
+fun MemberResponse.toDomain(): Member {
+    return Member(id, nickname, profileImgUrl, role)
+}
+
+fun MindSharePostDetailResponse.toDomain(): MindSharePostDetail {
+    return MindSharePostDetail(
+        postId,
+        title,
+        content,
+        viewCount,
+        commentCount,
+        LocalDateTime.parse(createdDate),
+        member.toDomain(),
+        comments.map {
+            it.toDomain()
+        },
+        likes.map {
+            it.toDomain()
+        }
+    )
+}
+
+fun MindSharePostCommentResponse.toDomain() : MindSharePostComment {
+    return MindSharePostComment(commentId,content, member.toDomain(), LocalDateTime.parse(createdDate),childComments.map {
+        it.toDomain()
+    })
+}
+
+fun MindSharePostChildCommentResponse.toDomain() : MindSharePostChildComment {
+    return MindSharePostChildComment(commentId,content,member.toDomain(),tagNickname, LocalDateTime.parse(createdDate))
+}
+
+fun MindSharePostLikeResponse.toDomain(): MindSharePostLike {
+    return MindSharePostLike(postId, member.toDomain(), LocalDateTime.parse(createdDate))
 }

@@ -8,8 +8,6 @@ import com.jydev.mindtravelapplication.ui.main.travel.record.RecordActivity
 import com.jydev.mindtravelapplication.ui.main.travel.recordlist.RecordListActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 @AndroidEntryPoint
@@ -27,7 +25,7 @@ class TravelFragment : BaseFragment<FragmentTravelBinding>(FragmentTravelBinding
 
     private fun observeData(){
         travelViewModel.observeErrorHandling()
-        travelViewModel.member.observe(viewLifecycleOwner){
+        travelViewModel.memberLogin.observe(viewLifecycleOwner){
             binding.nicknameTextView.text = "${it.nickname}님"
             calculateTravelDay(it.createdDate)
         }

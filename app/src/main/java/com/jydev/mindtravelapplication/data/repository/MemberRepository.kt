@@ -5,7 +5,7 @@ import com.jydev.mindtravelapplication.data.mapper.toDomain
 import com.jydev.mindtravelapplication.data.network.TokenRefreshManager
 import com.jydev.mindtravelapplication.data.network.getData
 import com.jydev.mindtravelapplication.data.preference.LoginPreference
-import com.jydev.mindtravelapplication.domain.model.Member
+import com.jydev.mindtravelapplication.domain.model.MemberLogin
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,7 +15,7 @@ class MemberRepository @Inject constructor(
     private val tokenRefreshManager: TokenRefreshManager,
     private val loginPreference: LoginPreference
 ) {
-    suspend fun getMember(): Member {
+    suspend fun getMember(): MemberLogin {
         return memberApi.getMember(loginPreference.getToken()?.accessToken ?: "")
             .getData(
                 tokenRefreshManager::refreshToken,
@@ -23,7 +23,7 @@ class MemberRepository @Inject constructor(
             ).toDomain()
     }
 
-    suspend fun editNickname(nickname : String) : Member {
+    suspend fun editNickname(nickname : String) : MemberLogin {
         val member = memberApi.editNickname(loginPreference.getToken()?.accessToken ?: "",nickname)
             .getData(
                 tokenRefreshManager::refreshToken
