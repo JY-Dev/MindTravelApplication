@@ -19,4 +19,10 @@ class MindSharePostDetailViewModel @Inject constructor(private val mindShareRepo
             mindShareRepository.fetchMindSharePost(postId)
         },_mindSharePostDetail::setValue)
     }
+
+    fun isCreator(memberId : Long) : Boolean{
+        return _mindSharePostDetail.value?.let{
+            memberId == it.member.id
+        } ?: false
+    }
 }

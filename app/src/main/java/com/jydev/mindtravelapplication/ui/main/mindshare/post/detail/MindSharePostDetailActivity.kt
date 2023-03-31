@@ -6,13 +6,23 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.jydev.mindtravelapplication.base.BaseActivity
 import com.jydev.mindtravelapplication.databinding.ActivityMindSharePostDetailBinding
+import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.MindSharePostCommentAdapter
+import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.MindSharePostCommentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class MindSharePostDetailActivity : BaseActivity<ActivityMindSharePostDetailBinding>(ActivityMindSharePostDetailBinding::inflate) {
     private val viewModel by viewModels<MindSharePostDetailViewModel>()
+    private val commentViewModel by viewModels<MindSharePostCommentViewModel>()
     private val dateTimeFormat = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)
+    private val commentAdapter by lazy {
+        MindSharePostCommentAdapter(
+            viewModel::isCreator,
+            commentViewModel::isCreator,
+            false
+        )
+    }
     override fun onCreateLifeCycle() {
         setPostId()
         viewModel.fetchMindSharePost()
@@ -27,11 +37,17 @@ class MindSharePostDetailActivity : BaseActivity<ActivityMindSharePostDetailBind
         postListButton.setOnClickListener {
             finish()
         }
+        swipeLayout.setOnRefreshListener {
+            viewModel.fetchMindSharePost()
+            swipeLayout.isRefreshing = false
+        }
+        commentRecyclerView.adapter = commentAdapter
     }
 
     private fun observeData(){
         viewModel.observeError()
         viewModel.mindSharePostDetail.observe(this){
+            commentAdapter.setItems(it.comments)
             binding.commentCountTextView.text = "댓글 ${it.commentCount}>"
             binding.categoryTextView.text = "[${it.category.text}]"
             binding.titleTextView.text = it.title

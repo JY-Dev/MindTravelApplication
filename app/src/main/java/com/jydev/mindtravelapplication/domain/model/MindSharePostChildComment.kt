@@ -3,9 +3,9 @@ package com.jydev.mindtravelapplication.domain.model
 import java.time.LocalDateTime
 
 data class MindSharePostChildComment(
-    val commentId : Long,
-    val content : String,
-    val member : Member,
+    override val commentId : Long,
+    override val content : String,
+    override val member : Member,
     val tagNickname : String,
-    val createdDate : LocalDateTime
-)
+    override val createdDate : LocalDateTime
+) : PostComment()
