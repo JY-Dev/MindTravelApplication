@@ -6,6 +6,7 @@ data class MindSharePost(
     val postId : Long,
     val member: Member,
     val title: String,
+    val category: MindSharePostCategory,
     val likeCount: Long,
     val viewCount: Long,
     val commentCount : Long,

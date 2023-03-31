@@ -1,5 +1,6 @@
 package com.jydev.mindtravelapplication.ui.main.mindshare.post
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.viewModels
@@ -7,7 +8,9 @@ import com.jydev.mindtravelapplication.base.BaseFragment
 import com.jydev.mindtravelapplication.data.model.MindSharePostsRequest
 import com.jydev.mindtravelapplication.databinding.FragmentMindSharePostBinding
 import com.jydev.mindtravelapplication.domain.model.MindSharePostCategory
+import com.jydev.mindtravelapplication.domain.model.MindSharePostDetail
 import com.jydev.mindtravelapplication.ui.main.mindshare.MindShareViewModel
+import com.jydev.mindtravelapplication.ui.main.mindshare.post.detail.MindSharePostDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,8 +22,12 @@ class MindSharePostFragment private constructor() :
     private val viewModel by viewModels<MindSharePostViewModel>()
     private val mindShareViewModel by viewModels<MindShareViewModel>({requireParentFragment()})
     private val adapter by lazy {
-        MindSharePostAdapter {
-
+        MindSharePostAdapter {postId ->
+            context?.let {
+                startActivity(Intent(it,MindSharePostDetailActivity::class.java).apply {
+                    putExtra(MindSharePostDetailActivity.POST_ID,postId)
+                })
+            }
         }
     }
 
