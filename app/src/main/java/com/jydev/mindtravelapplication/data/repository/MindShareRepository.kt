@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.jydev.mindtravelapplication.data.api.MindApi
 import com.jydev.mindtravelapplication.data.mapper.toDomain
+import com.jydev.mindtravelapplication.data.model.MindSharePostLikeResponse
 import com.jydev.mindtravelapplication.data.model.MindSharePostRequest
 import com.jydev.mindtravelapplication.data.model.MindSharePostsRequest
 import com.jydev.mindtravelapplication.data.network.TokenRefreshManager
@@ -12,6 +13,7 @@ import com.jydev.mindtravelapplication.data.network.getData
 import com.jydev.mindtravelapplication.data.preference.LoginPreference
 import com.jydev.mindtravelapplication.domain.model.MindSharePost
 import com.jydev.mindtravelapplication.domain.model.MindSharePostDetail
+import com.jydev.mindtravelapplication.domain.model.MindSharePostLike
 import com.jydev.mindtravelapplication.domain.model.MindSharePosts
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -36,6 +38,24 @@ class MindShareRepository @Inject constructor(
             loginPreference.getToken()?.accessToken?:"",
             postId
         ).getData(tokenRefreshManager::refreshToken).toDomain()
+    }
+
+    suspend fun mindSharePostLike(postId : Long) : List<MindSharePostLike> {
+        return mindApi.mindSharePostLike(
+            loginPreference.getToken()?.accessToken?:"",
+            postId
+        ).getData(tokenRefreshManager::refreshToken).map {
+            it.toDomain()
+        }
+    }
+
+    suspend fun deleteMindSharePostLike(postId : Long) : List<MindSharePostLike> {
+        return mindApi.deleteMindSharePostLike(
+            loginPreference.getToken()?.accessToken?:"",
+            postId
+        ).getData(tokenRefreshManager::refreshToken).map {
+            it.toDomain()
+        }
     }
 
     fun fetchMindSharePosts(request: MindSharePostsRequest) : Flow<PagingData<MindSharePost>>{

@@ -12,7 +12,6 @@ interface MindApi {
         @Body recordRequest: RecordRequest
     ) : Response<HttpResponse<Unit>>
 
-    @FormUrlEncoded
     @DELETE("/v1/mind/travel/record-mood/{moodRecordId}")
     suspend fun deleteRecordMood(
         @Header("Authorization") accessToken: String,
@@ -44,4 +43,16 @@ interface MindApi {
         @Header("Authorization") accessToken: String,
         @Path("postId") postId : Long
     ) : Response<HttpResponse<MindSharePostDetailResponse>>
+
+    @POST("/v1/mind/share/post/{postId}/like")
+    suspend fun mindSharePostLike(
+        @Header("Authorization") accessToken: String,
+        @Path("postId") postId : Long
+    ) : Response<HttpResponse<List<MindSharePostLikeResponse>>>
+
+    @DELETE("/v1/mind/share/post/{postId}/like")
+    suspend fun deleteMindSharePostLike(
+        @Header("Authorization") accessToken: String,
+        @Path("postId") postId : Long
+    ) : Response<HttpResponse<List<MindSharePostLikeResponse>>>
 }

@@ -15,7 +15,6 @@ class MindSharePostViewHolder(private val onClick : (postId : Long) -> Unit,priv
             with(binding) {
                 nicknameTextView.text = item.member.nickname
                 viewCountTextView.text = item.viewCount.toString()
-                likeCountTextView.text = item.likeCount.toString()
                 commentCountTextView.text = item.commentCount.toString()
                 titleTextView.text = item.title
                 val dateTimeFormat = if(item.createdDate.isToday()) timeFormatter else dateFormatter

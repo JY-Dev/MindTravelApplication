@@ -1,11 +1,15 @@
 package com.jydev.mindtravelapplication.ui.main.mindshare.post.detail
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
+import com.jydev.mindtravelapplication.R
 import com.jydev.mindtravelapplication.base.BaseActivity
 import com.jydev.mindtravelapplication.databinding.ActivityMindSharePostDetailBinding
+import com.jydev.mindtravelapplication.ui.main.MainActivity
 import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.MindSharePostCommentAdapter
 import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.MindSharePostCommentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +41,9 @@ class MindSharePostDetailActivity : BaseActivity<ActivityMindSharePostDetailBind
         postListButton.setOnClickListener {
             finish()
         }
+        likeButton.setOnClickListener {
+            viewModel.clickLike()
+        }
         swipeLayout.setOnRefreshListener {
             viewModel.fetchMindSharePost()
             swipeLayout.isRefreshing = false
@@ -53,9 +60,13 @@ class MindSharePostDetailActivity : BaseActivity<ActivityMindSharePostDetailBind
             binding.titleTextView.text = it.title
             binding.contentTextView.text = it.content
             binding.viewCountTextView.text = it.viewCount.toString()
-            binding.likeCountBottomTextView.text = it.likes.size.toString()
             binding.commentCountBottomTextView.text = it.commentCount.toString()
             binding.createdDateTextView.text = it.createdDate.format(dateTimeFormat)
+        }
+        viewModel.isLikeClicked.observe(this){
+            binding.likeCountBottomTextView.text = it.first.size.toString()
+            val imageDrawableId = if(it.second) R.drawable.fill_heart else R.drawable.heart
+            binding.likeButton.background = ContextCompat.getDrawable(this,imageDrawableId)
         }
     }
 

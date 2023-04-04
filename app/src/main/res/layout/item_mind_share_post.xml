@@ -67,32 +67,6 @@
         app:layout_constraintBottom_toBottomOf="@id/viewText"
         app:layout_constraintStart_toEndOf="@id/viewText"/>
 
-    <TextView
-        android:id="@+id/likeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16dp"
-        android:textColor="#828282"
-        android:layout_marginStart="8dp"
-        android:text="좋아요"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/viewCountTextView"
-        app:layout_constraintBottom_toBottomOf="@id/viewCountTextView"
-        app:layout_constraintStart_toEndOf="@id/viewCountTextView"/>
-
-    <TextView
-        android:id="@+id/likeCountTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16dp"
-        android:textColor="#828282"
-        android:layout_marginStart="4dp"
-        android:text="24"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/likeText"
-        app:layout_constraintBottom_toBottomOf="@id/likeText"
-        app:layout_constraintStart_toEndOf="@id/likeText"/>
-
     <View
         android:id="@+id/commentBox"
         android:layout_width="60dp"
