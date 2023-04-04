@@ -7,7 +7,7 @@ import com.jydev.mindtravelapplication.data.preference.LoginPreference
 import com.jydev.mindtravelapplication.data.repository.MindShareRepository
 import com.jydev.mindtravelapplication.domain.model.MindSharePostDetail
 import com.jydev.mindtravelapplication.domain.model.MindSharePostLike
-import com.jydev.mindtravelapplication.ui.main.mindshare.post.detail.MindSharePostLikeViewModel.Companion.isLikeClicked
+import com.jydev.mindtravelapplication.ui.main.mindshare.post.like.MindSharePostLikeViewModel.Companion.isLikeClicked
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

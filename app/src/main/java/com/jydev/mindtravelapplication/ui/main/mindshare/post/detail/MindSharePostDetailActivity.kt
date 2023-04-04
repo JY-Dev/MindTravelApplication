@@ -1,22 +1,21 @@
 package com.jydev.mindtravelapplication.ui.main.mindshare.post.detail
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.jydev.mindtravelapplication.R
 import com.jydev.mindtravelapplication.base.BaseActivity
 import com.jydev.mindtravelapplication.databinding.ActivityMindSharePostDetailBinding
-import com.jydev.mindtravelapplication.ui.main.MainActivity
+import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.MindSharePostCommentActivity
 import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.MindSharePostCommentAdapter
 import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.MindSharePostCommentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
-class MindSharePostDetailActivity : BaseActivity<ActivityMindSharePostDetailBinding>(ActivityMindSharePostDetailBinding::inflate) {
+class MindSharePostDetailActivity :
+    BaseActivity<ActivityMindSharePostDetailBinding>(ActivityMindSharePostDetailBinding::inflate) {
     private val viewModel by viewModels<MindSharePostDetailViewModel>()
     private val commentViewModel by viewModels<MindSharePostCommentViewModel>()
     private val dateTimeFormat = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)
@@ -27,6 +26,7 @@ class MindSharePostDetailActivity : BaseActivity<ActivityMindSharePostDetailBind
             false
         )
     }
+
     override fun onCreateLifeCycle() {
         setPostId()
         viewModel.fetchMindSharePost()
@@ -34,7 +34,7 @@ class MindSharePostDetailActivity : BaseActivity<ActivityMindSharePostDetailBind
         observeData()
     }
 
-    private fun ActivityMindSharePostDetailBinding.initView(){
+    private fun ActivityMindSharePostDetailBinding.initView() {
         backButton.setOnClickListener {
             finish()
         }
@@ -48,12 +48,21 @@ class MindSharePostDetailActivity : BaseActivity<ActivityMindSharePostDetailBind
             viewModel.fetchMindSharePost()
             swipeLayout.isRefreshing = false
         }
+        commentImage.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@MindSharePostDetailActivity,
+                    MindSharePostCommentActivity::class.java
+                ).apply {
+                    putExtra(POST_DETAIL,viewModel.mindSharePostDetail.value)
+                })
+        }
         commentRecyclerView.adapter = commentAdapter
     }
 
-    private fun observeData(){
+    private fun observeData() {
         viewModel.observeError()
-        viewModel.mindSharePostDetail.observe(this){
+        viewModel.mindSharePostDetail.observe(this) {
             commentAdapter.setItems(it.comments)
             binding.commentCountTextView.text = "댓글 ${it.commentCount}>"
             binding.categoryTextView.text = "[${it.category.text}]"
@@ -63,24 +72,25 @@ class MindSharePostDetailActivity : BaseActivity<ActivityMindSharePostDetailBind
             binding.commentCountBottomTextView.text = it.commentCount.toString()
             binding.createdDateTextView.text = it.createdDate.format(dateTimeFormat)
         }
-        viewModel.isLikeClicked.observe(this){
+        viewModel.isLikeClicked.observe(this) {
             binding.likeCountBottomTextView.text = it.first.size.toString()
-            val imageDrawableId = if(it.second) R.drawable.fill_heart else R.drawable.heart
-            binding.likeButton.background = ContextCompat.getDrawable(this,imageDrawableId)
+            val imageDrawableId = if (it.second) R.drawable.fill_heart else R.drawable.heart
+            binding.likeButton.background = ContextCompat.getDrawable(this, imageDrawableId)
         }
     }
 
-    private fun setPostId(){
+    private fun setPostId() {
         val postId = intent.getLongExtra(POST_ID, viewModel.postId)
-        if(postId == -1L){
-            Toast.makeText(this,"글 정보가 없습니다.",Toast.LENGTH_SHORT).show()
+        if (postId == -1L) {
+            Toast.makeText(this, "글 정보가 없습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
         viewModel.postId = postId
     }
 
-    companion object{
+    companion object {
         const val POST_ID = "post_id"
-        const val DATE_TIME_FORMAT ="yyyy.MM.dd. HH:mm"
+        const val POST_DETAIL = "POST_DETAIL"
+        const val DATE_TIME_FORMAT = "yyyy.MM.dd. HH:mm"
     }
 }

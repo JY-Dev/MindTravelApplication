@@ -14,6 +14,8 @@ import com.jydev.mindtravelapplication.ui.main.mindshare.post.detail.MindSharePo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -52,8 +54,10 @@ class MindSharePostFragment private constructor() :
                 adapter.submitData(it)
             }
         }
-        mindShareViewModel.postEvent.observe(viewLifecycleOwner){
-            adapter.refresh()
+        CoroutineScope(Dispatchers.Main).launch {
+            mindShareViewModel.postEvent.collect{
+                adapter.refresh()
+            }
         }
     }
 

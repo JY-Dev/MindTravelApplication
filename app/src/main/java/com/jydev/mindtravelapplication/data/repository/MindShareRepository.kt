@@ -11,10 +11,7 @@ import com.jydev.mindtravelapplication.data.model.MindSharePostsRequest
 import com.jydev.mindtravelapplication.data.network.TokenRefreshManager
 import com.jydev.mindtravelapplication.data.network.getData
 import com.jydev.mindtravelapplication.data.preference.LoginPreference
-import com.jydev.mindtravelapplication.domain.model.MindSharePost
-import com.jydev.mindtravelapplication.domain.model.MindSharePostDetail
-import com.jydev.mindtravelapplication.domain.model.MindSharePostLike
-import com.jydev.mindtravelapplication.domain.model.MindSharePosts
+import com.jydev.mindtravelapplication.domain.model.*
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -64,5 +61,33 @@ class MindShareRepository @Inject constructor(
         ){
             MindSharePostPagingSource(request, mindApi,loginPreference,tokenRefreshManager)
         }.flow
+    }
+
+    suspend fun fetchPostLikes(postId : Long) : List<MindSharePostLike> {
+        return mindApi.fetchMindSharePostLikes(
+            loginPreference.getToken()?.accessToken?:"",
+            postId
+        ).getData(tokenRefreshManager::refreshToken).map {
+            it.toDomain()
+        }
+    }
+
+    suspend fun fetchPostComments(postId : Long) : List<MindSharePostComment> {
+        return mindApi.fetchMindSharePostComments(
+            loginPreference.getToken()?.accessToken?:"",
+            postId
+        ).getData(tokenRefreshManager::refreshToken).map {
+            it.toDomain()
+        }
+    }
+
+    suspend fun insertPostComment(content : String, postId: Long) : List<MindSharePostComment> {
+        return mindApi.insertMindSharePostComment(
+            loginPreference.getToken()?.accessToken?:"",
+            postId,
+            content
+        ).getData(tokenRefreshManager::refreshToken).map {
+            it.toDomain()
+        }
     }
 }

@@ -55,4 +55,32 @@ interface MindApi {
         @Header("Authorization") accessToken: String,
         @Path("postId") postId : Long
     ) : Response<HttpResponse<List<MindSharePostLikeResponse>>>
+
+    @GET("/v1/mind/share/post/{postId}/comments")
+    suspend fun fetchMindSharePostComments(
+        @Header("Authorization") accessToken: String,
+        @Path("postId") postId : Long
+    ) : Response<HttpResponse<List<MindSharePostCommentResponse>>>
+
+    @GET("/v1/mind/share/post/{postId}/likes")
+    suspend fun fetchMindSharePostLikes(
+        @Header("Authorization") accessToken: String,
+        @Path("postId") postId : Long
+    ) : Response<HttpResponse<List<MindSharePostLikeResponse>>>
+
+    @FormUrlEncoded
+    @POST("/v1/mind/share/post/{postId}/comment")
+    suspend fun insertMindSharePostComment(
+        @Header("Authorization") accessToken: String,
+        @Path("postId") postId : Long,
+        @Field("content") content : String
+    ) : Response<HttpResponse<List<MindSharePostCommentResponse>>>
+
+    @FormUrlEncoded
+    @POST("/v1/mind/share/post/{postId}/comment/{commentId}")
+    suspend fun deleteMindSharePostComment(
+        @Header("Authorization") accessToken: String,
+        @Path("postId") postId : Long,
+        @Path("commentId") commentId : Long
+    ) : Response<HttpResponse<List<MindSharePostCommentResponse>>>
 }

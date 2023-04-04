@@ -1,7 +1,10 @@
 package com.jydev.mindtravelapplication.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
 
+@Parcelize
 data class MindSharePostDetail(
     val postId : Long,
     val title : String,
@@ -13,4 +16,4 @@ data class MindSharePostDetail(
     val member : Member,
     val comments : List<MindSharePostComment>,
     val likes : List<MindSharePostLike>
-)
+) : Parcelable

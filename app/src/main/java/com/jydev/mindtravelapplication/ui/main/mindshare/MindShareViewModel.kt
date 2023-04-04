@@ -1,15 +1,22 @@
 package com.jydev.mindtravelapplication.ui.main.mindshare
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jydev.mindtravelapplication.util.SingleLiveEvent
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class MindShareViewModel : ViewModel() {
-    private val _postEvent = SingleLiveEvent<Unit>()
-    val postEvent: LiveData<Unit>
+    private val _postEvent = MutableSharedFlow<Unit>()
+    val postEvent: Flow<Unit>
         get() = _postEvent
 
     fun sendPostEvent() {
-        _postEvent.value = Unit
+        viewModelScope.launch {
+            _postEvent.emit(Unit)
+        }
     }
 }
