@@ -76,11 +76,42 @@ interface MindApi {
         @Field("content") content : String
     ) : Response<HttpResponse<List<MindSharePostCommentResponse>>>
 
-    @FormUrlEncoded
-    @POST("/v1/mind/share/post/{postId}/comment/{commentId}")
+    @DELETE("/v1/mind/share/post/{postId}/comment/{commentId}")
     suspend fun deleteMindSharePostComment(
         @Header("Authorization") accessToken: String,
         @Path("postId") postId : Long,
         @Path("commentId") commentId : Long
+    ) : Response<HttpResponse<List<MindSharePostCommentResponse>>>
+
+    @FormUrlEncoded
+    @PATCH("/v1/mind/share/post/{postId}/comment/{commentId}")
+    suspend fun editMindSharePostComment(
+        @Header("Authorization") accessToken: String,
+        @Path("postId") postId : Long,
+        @Path("commentId") commentId : Long,
+        @Field("content") content: String
+    ) : Response<HttpResponse<List<MindSharePostCommentResponse>>>
+
+    @POST("/v1/mind/share/post/{postId}/comment/child")
+    suspend fun insertMindSharePostChildComment(
+        @Header("Authorization") accessToken: String,
+        @Path("postId") postId : Long,
+        @Body request : MindSharePostChildCommentRequest
+    ) : Response<HttpResponse<List<MindSharePostCommentResponse>>>
+
+    @DELETE("/v1/mind/share/post/{postId}/comment/child/{commentId}")
+    suspend fun deleteMindSharePostChildComment(
+        @Header("Authorization") accessToken: String,
+        @Path("postId") postId : Long,
+        @Path("commentId") commentId : Long
+    ) : Response<HttpResponse<List<MindSharePostCommentResponse>>>
+
+    @FormUrlEncoded
+    @PATCH("/v1/mind/share/post/{postId}/comment/child/{commentId}")
+    suspend fun editMindSharePostChildComment(
+        @Header("Authorization") accessToken: String,
+        @Path("postId") postId : Long,
+        @Path("commentId") commentId : Long,
+        @Field("content") content: String
     ) : Response<HttpResponse<List<MindSharePostCommentResponse>>>
 }

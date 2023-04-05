@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.jydev.mindtravelapplication.data.api.MindApi
 import com.jydev.mindtravelapplication.data.mapper.toDomain
+import com.jydev.mindtravelapplication.data.model.MindSharePostChildCommentRequest
 import com.jydev.mindtravelapplication.data.model.MindSharePostLikeResponse
 import com.jydev.mindtravelapplication.data.model.MindSharePostRequest
 import com.jydev.mindtravelapplication.data.model.MindSharePostsRequest
@@ -85,6 +86,58 @@ class MindShareRepository @Inject constructor(
         return mindApi.insertMindSharePostComment(
             loginPreference.getToken()?.accessToken?:"",
             postId,
+            content
+        ).getData(tokenRefreshManager::refreshToken).map {
+            it.toDomain()
+        }
+    }
+
+    suspend fun deletePostComment(postId: Long,commentId : Long) : List<MindSharePostComment> {
+        return mindApi.deleteMindSharePostComment(
+            loginPreference.getToken()?.accessToken?:"",
+            postId,
+            commentId
+        ).getData(tokenRefreshManager::refreshToken).map {
+            it.toDomain()
+        }
+    }
+
+    suspend fun editPostComment(content : String, commentId : Long, postId : Long) : List<MindSharePostComment> {
+        return mindApi.editMindSharePostComment(
+            loginPreference.getToken()?.accessToken?:"",
+            postId,
+            commentId,
+            content
+        ).getData(tokenRefreshManager::refreshToken).map {
+            it.toDomain()
+        }
+    }
+
+    suspend fun insertPostChildComment(request : MindSharePostChildCommentRequest, postId : Long) : List<MindSharePostComment> {
+        return mindApi.insertMindSharePostChildComment(
+            loginPreference.getToken()?.accessToken?:"",
+            postId,
+            request
+        ).getData(tokenRefreshManager::refreshToken).map {
+            it.toDomain()
+        }
+    }
+
+    suspend fun deletePostChildComment(postId: Long,commentId : Long) : List<MindSharePostComment> {
+        return mindApi.deleteMindSharePostChildComment(
+            loginPreference.getToken()?.accessToken?:"",
+            postId,
+            commentId
+        ).getData(tokenRefreshManager::refreshToken).map {
+            it.toDomain()
+        }
+    }
+
+    suspend fun editPostChildComment(content : String, commentId : Long, postId : Long) : List<MindSharePostComment> {
+        return mindApi.editMindSharePostChildComment(
+            loginPreference.getToken()?.accessToken?:"",
+            postId,
+            commentId,
             content
         ).getData(tokenRefreshManager::refreshToken).map {
             it.toDomain()

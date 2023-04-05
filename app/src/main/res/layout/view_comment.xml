@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -90,11 +89,44 @@
         app:layout_constraintStart_toEndOf="@id/profileCard"/>
 
     <androidx.constraintlayout.widget.Group
+        android:id="@+id/commentGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="commentButton,
+        contentTextView, nicknameTextView,profileCard,createdDateTextView"/>
+
+    <androidx.constraintlayout.widget.Group
         android:id="@+id/editGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
         app:constraint_referenced_ids="editButton,deleteButton"/>
+
+    <TextView
+        android:id="@+id/deletedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="삭제된 댓글입니다."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/commentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="답글쓰기"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/createdDateTextView"
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView"
+        app:layout_constraintBottom_toBottomOf="@id/createdDateTextView"/>
 
     <TextView
         android:id="@+id/editButton"
@@ -105,7 +137,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@id/createdDateTextView"
+        app:layout_constraintStart_toEndOf="@id/commentButton"
         app:layout_constraintTop_toBottomOf="@+id/contentTextView"
         app:layout_constraintBottom_toBottomOf="@id/createdDateTextView"/>
 

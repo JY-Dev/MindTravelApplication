@@ -57,13 +57,13 @@ fun MindSharePostDetailResponse.toDomain(): MindSharePostDetail {
 }
 
 fun MindSharePostCommentResponse.toDomain() : MindSharePostComment {
-    return MindSharePostComment(commentId,content, member.toDomain(), LocalDateTime.parse(createdDate),childComments.map {
+    return MindSharePostComment(commentId,content, member.toDomain(),isDeleted, LocalDateTime.parse(createdDate),childComments.map {
         it.toDomain()
     })
 }
 
 fun MindSharePostChildCommentResponse.toDomain() : MindSharePostChildComment {
-    return MindSharePostChildComment(commentId,content,member.toDomain(),tagNickname, LocalDateTime.parse(createdDate))
+    return MindSharePostChildComment(commentId,content,member.toDomain(),parentCommentId,tagNickname, LocalDateTime.parse(createdDate))
 }
 
 fun MindSharePostLikeResponse.toDomain(): MindSharePostLike {

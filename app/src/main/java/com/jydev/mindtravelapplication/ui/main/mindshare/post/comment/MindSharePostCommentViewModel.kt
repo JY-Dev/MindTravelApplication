@@ -3,6 +3,7 @@ package com.jydev.mindtravelapplication.ui.main.mindshare.post.comment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jydev.mindtravelapplication.base.NetworkViewModel
+import com.jydev.mindtravelapplication.data.model.MindSharePostChildCommentRequest
 import com.jydev.mindtravelapplication.data.preference.LoginPreference
 import com.jydev.mindtravelapplication.data.repository.MindShareRepository
 import com.jydev.mindtravelapplication.domain.model.MindSharePostComment
@@ -44,4 +45,43 @@ class MindSharePostCommentViewModel @Inject constructor(
         }
     }
 
+    fun deleteComment(commentId : Long){
+        getApiResult({
+            mindShareRepository.deletePostComment(postDetail.postId, commentId)
+        }){
+            _comments.value = it
+        }
+    }
+
+    fun editComment(content : String,commentId : Long){
+        getApiResult({
+            mindShareRepository.editPostComment(content,commentId,postDetail.postId)
+        }){
+            _comments.value = it
+        }
+    }
+
+    fun insertChildComment(request : MindSharePostChildCommentRequest){
+        getApiResult({
+            mindShareRepository.insertPostChildComment(request,postDetail.postId)
+        }){
+            _comments.value = it
+        }
+    }
+
+    fun deleteChildComment(commentId : Long){
+        getApiResult({
+            mindShareRepository.deletePostChildComment(postDetail.postId, commentId)
+        }){
+            _comments.value = it
+        }
+    }
+
+    fun editChildComment(content : String, commentId : Long){
+        getApiResult({
+            mindShareRepository.editPostChildComment(content,commentId,postDetail.postId)
+        }){
+            _comments.value = it
+        }
+    }
 }

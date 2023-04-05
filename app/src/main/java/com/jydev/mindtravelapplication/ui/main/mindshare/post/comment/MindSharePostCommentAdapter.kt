@@ -9,7 +9,8 @@ import com.jydev.mindtravelapplication.domain.model.PostComment
 class MindSharePostCommentAdapter(
     private val isPostCreator: (memberId: Long) -> Boolean,
     private val isCommentCreator: (memberId: Long) -> Boolean,
-    private val isEditMode: Boolean
+    private val isEditMode: Boolean,
+    private val commentOperator: MindSharePostCommentViewHolder.CommentOperator? = null
 ) : RecyclerView.Adapter<MindSharePostCommentViewHolder>() {
     private var items : List<PostComment> = emptyList()
     override fun onCreateViewHolder(
@@ -20,7 +21,8 @@ class MindSharePostCommentAdapter(
             isPostCreator,
             isCommentCreator,
             isEditMode,
-            ItemMindShareCommentBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            ItemMindShareCommentBinding.inflate(LayoutInflater.from(parent.context),parent,false),
+            commentOperator
         )
     }
 
