@@ -35,7 +35,7 @@ class MindSharePostCommentViewHolder(
                     viewComment.tagNicknameTextView.visibility = View.GONE
                     childCommentRecyclerView.adapter = adapter
                     adapter.setItems(item.childComments)
-                    viewComment.commentButton.setOnClickListener {
+                    viewComment.replyButton.setOnClickListener {
                         commentOperator?.replyComment(item.content,item.commentId,-1L)
                     }
                     viewComment.deleteButton.setOnClickListener {
@@ -56,7 +56,7 @@ class MindSharePostCommentViewHolder(
                 is MindSharePostChildComment -> {
                     viewComment.tagNicknameTextView.visibility = if(item.tagNickname.isEmpty()) View.GONE else View.VISIBLE
                     viewComment.tagNicknameTextView.text = item.tagNickname
-                    viewComment.commentButton.setOnClickListener {
+                    viewComment.replyButton.setOnClickListener {
                         commentOperator?.replyComment(item.content,item.parentCommentId,item.member.id)
                     }
                     viewComment.deleteButton.setOnClickListener {

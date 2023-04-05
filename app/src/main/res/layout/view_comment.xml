@@ -92,7 +92,7 @@
         android:id="@+id/commentGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="commentButton,
+        app:constraint_referenced_ids="
         contentTextView, nicknameTextView,profileCard,createdDateTextView"/>
 
     <androidx.constraintlayout.widget.Group
@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:constraint_referenced_ids="editButton,deleteButton"/>
+        app:constraint_referenced_ids="editButton,deleteButton,replyButton"/>
 
     <TextView
         android:id="@+id/deletedText"
@@ -116,7 +116,7 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
-        android:id="@+id/commentButton"
+        android:id="@+id/replyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="답글"
@@ -137,7 +137,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginStart="6dp"
-        app:layout_constraintStart_toEndOf="@id/commentButton"
+        app:layout_constraintStart_toEndOf="@id/replyButton"
         app:layout_constraintTop_toBottomOf="@+id/contentTextView"
         app:layout_constraintBottom_toBottomOf="@id/createdDateTextView"/>
 
