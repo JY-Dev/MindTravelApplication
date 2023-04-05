@@ -31,12 +31,12 @@ class MindSharePostCommentViewHolder(
             viewComment.commentGroup.visibility = View.VISIBLE
             when(item){
                 is MindSharePostComment -> {
-                    val adapter = MindSharePostCommentAdapter(isPostCreator, isCreator, isEditMode)
+                    val adapter = MindSharePostCommentAdapter(isPostCreator, isCreator, isEditMode,commentOperator)
                     viewComment.tagNicknameTextView.visibility = View.GONE
                     childCommentRecyclerView.adapter = adapter
                     adapter.setItems(item.childComments)
                     viewComment.commentButton.setOnClickListener {
-                        commentOperator?.replyComment(item.commentId,-1L)
+                        commentOperator?.replyComment(item.content,item.commentId,-1L)
                     }
                     viewComment.deleteButton.setOnClickListener {
                         commentOperator?.delete(item.commentId)
@@ -57,7 +57,7 @@ class MindSharePostCommentViewHolder(
                     viewComment.tagNicknameTextView.visibility = if(item.tagNickname.isEmpty()) View.GONE else View.VISIBLE
                     viewComment.tagNicknameTextView.text = item.tagNickname
                     viewComment.commentButton.setOnClickListener {
-                        commentOperator?.replyComment(item.parentCommentId,item.commentId)
+                        commentOperator?.replyComment(item.content,item.parentCommentId,item.member.id)
                     }
                     viewComment.deleteButton.setOnClickListener {
                         commentOperator?.deleteChild(item.commentId)
@@ -73,7 +73,7 @@ class MindSharePostCommentViewHolder(
     interface CommentOperator{
         fun delete(commentId : Long)
         fun deleteChild(commentId : Long)
-        fun replyComment(parentCommentId : Long, tagCommentId : Long)
+        fun replyComment(content : String, parentCommentId : Long, tagMemberId : Long)
         fun edit(content : String, commentId: Long)
         fun editChild(content : String, commentId: Long)
     }

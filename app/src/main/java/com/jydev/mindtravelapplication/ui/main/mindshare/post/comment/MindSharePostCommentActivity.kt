@@ -12,6 +12,7 @@ import com.jydev.mindtravelapplication.data.model.MindSharePostChildCommentReque
 import com.jydev.mindtravelapplication.databinding.ActivityMindSharePostCommentBinding
 import com.jydev.mindtravelapplication.domain.model.MindSharePostDetail
 import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.edit.MindSharePostCommentEditActivity
+import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.reply.MindSharePostCommentReplyActivity
 import com.jydev.mindtravelapplication.ui.main.mindshare.post.detail.MindSharePostDetailActivity
 import com.jydev.mindtravelapplication.ui.main.mindshare.post.like.MindSharePostLikeActivity
 import com.jydev.mindtravelapplication.ui.main.mindshare.post.like.MindSharePostLikeViewModel
@@ -99,8 +100,13 @@ class MindSharePostCommentActivity : BaseActivity<ActivityMindSharePostCommentBi
         viewModel.deleteChildComment(commentId)
     }
 
-    override fun replyComment(parentCommentId: Long, tagCommentId: Long) {
-
+    override fun replyComment(content : String, parentCommentId: Long, tagMemberId: Long) {
+        launcher.launch(Intent(this, MindSharePostCommentReplyActivity::class.java).apply {
+            putExtra(CONTENT,content)
+            putExtra(TAG_MEMBER_ID,tagMemberId)
+            putExtra(PARENT_COMMENT_ID,parentCommentId)
+            putExtra(MindSharePostDetailActivity.POST_DETAIL,viewModel.postDetail)
+        })
     }
 
     override fun edit(content: String, commentId: Long) {
@@ -124,6 +130,8 @@ class MindSharePostCommentActivity : BaseActivity<ActivityMindSharePostCommentBi
     companion object{
         const val IS_CHILD = "is_child"
         const val COMMENT_ID = "comment_id"
+        const val PARENT_COMMENT_ID = "comment_id"
+        const val TAG_MEMBER_ID = "tag_comment_id"
         const val CONTENT = "content"
     }
 }
