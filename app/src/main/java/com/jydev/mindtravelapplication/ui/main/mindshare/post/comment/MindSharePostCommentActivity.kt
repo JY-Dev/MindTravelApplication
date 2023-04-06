@@ -40,6 +40,8 @@ class MindSharePostCommentActivity : BaseActivity<ActivityMindSharePostCommentBi
     }
 
     private fun observeData(){
+        viewModel.observeError()
+        likeViewModel.observeError()
         viewModel.comments.observe(this){
             binding.commentCountTextView.text = "댓글 ${it.size}"
             adapter.setItems(it)

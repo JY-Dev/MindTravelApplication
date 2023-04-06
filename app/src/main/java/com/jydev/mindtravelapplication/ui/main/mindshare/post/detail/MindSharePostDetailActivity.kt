@@ -62,6 +62,7 @@ class MindSharePostDetailActivity :
 
     private fun observeData() {
         viewModel.observeError()
+        commentViewModel.observeError()
         viewModel.mindSharePostDetail.observe(this) {
             commentAdapter.setItems(it.comments)
             binding.commentCountTextView.text = "댓글 ${it.commentCount}>"

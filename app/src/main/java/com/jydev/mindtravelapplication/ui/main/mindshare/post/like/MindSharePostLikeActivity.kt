@@ -29,6 +29,7 @@ class MindSharePostLikeActivity : BaseActivity<ActivityMindSharePostLikeBinding>
     }
 
     private fun observeData(){
+        viewModel.observeError()
         viewModel.likes.observe(this){
             adapter.setItems(it)
             binding.likeCountTextView.text = "좋아요 ${it.size}"
