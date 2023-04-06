@@ -65,6 +65,7 @@ class MindSharePostDetailActivity :
         commentViewModel.observeError()
         viewModel.mindSharePostDetail.observe(this) {
             commentAdapter.setItems(it.comments)
+            binding.nicknameTextView.text = it.member.nickname
             binding.commentCountTextView.text = "댓글 ${it.commentCount}>"
             binding.categoryTextView.text = "[${it.category.text}]"
             binding.titleTextView.text = it.title
