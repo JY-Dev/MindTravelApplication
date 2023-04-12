@@ -1,11 +1,10 @@
 package com.jydev.mindtravelapplication.base
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jydev.mindtravelapplication.data.network.exception.RefreshTokenExpiredException
+import com.jydev.mindtravelapplication.data.network.exception.RequireLoginException
 import com.jydev.mindtravelapplication.data.network.exception.RetryRequestException
 import com.jydev.mindtravelapplication.util.Event
 import kotlinx.coroutines.flow.Flow
@@ -44,7 +43,7 @@ open class NetworkViewModel : ViewModel() {
     private fun errorHandling(e : Throwable, retry : (() -> Unit)? = null){
         e.printStackTrace()
         when(e){
-            is RefreshTokenExpiredException -> {
+            is RequireLoginException -> {
                 _tokenExpired.value = Event(Unit)
             }
             is RetryRequestException -> {

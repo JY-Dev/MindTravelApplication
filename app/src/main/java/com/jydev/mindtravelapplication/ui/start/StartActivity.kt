@@ -19,6 +19,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::i
     }
 
     private fun observeData(){
+        startViewModel.observeError()
         startViewModel.moveScreen.observe(this){
             val intent : Intent = when(it){
                 is MoveScreen.MainScreen -> {

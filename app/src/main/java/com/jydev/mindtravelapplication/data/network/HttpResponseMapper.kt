@@ -2,7 +2,7 @@ package com.jydev.mindtravelapplication.data.network
 
 import com.google.gson.Gson
 import com.jydev.mindtravelapplication.data.model.HttpResponse
-import com.jydev.mindtravelapplication.data.network.exception.RefreshTokenExpiredException
+import com.jydev.mindtravelapplication.data.network.exception.RequireLoginException
 import retrofit2.Response
 
 val gson = Gson()
@@ -17,6 +17,7 @@ suspend fun <R, T : Response<HttpResponse<R>>> T.getData(
         val data = gson.fromJson(this.errorBody()?.string(), HttpResponse::class.java)
         when (this.code()) {
             403 -> tokenRefresh?.invoke() ?: tokenExpired?.invoke() ?: throw IllegalArgumentException("토큰 만료 처리 오류")
+            401 -> throw RequireLoginException()
             else -> throw HttpErrorCodeException(this.code(), data.message)
         }
     }
