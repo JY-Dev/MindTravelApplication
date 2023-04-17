@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.messaging.FirebaseMessaging
 import com.jydev.mindtravelapplication.BuildConfig
 import com.jydev.mindtravelapplication.ui.main.MainActivity
 import com.jydev.mindtravelapplication.base.BaseActivity
@@ -62,8 +63,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     override fun activityResultCallback(data : Intent){
         val accessToken = GoogleSignIn.getSignedInAccountFromIntent(data).result.idToken?:""
-        loginViewModel.socialLogin(SocialLoginRequest(SocialLoginType.GOOGLE,accessToken))
-        Log.d("Login","로그인 입니다!!! ${GoogleSignIn.getSignedInAccountFromIntent(data).result.idToken}")
+        issuedFcmToken {
+            loginViewModel.socialLogin(SocialLoginRequest(SocialLoginType.GOOGLE,accessToken, it))
+        }
     }
 
     private fun initGoogleLoginSetting(){
@@ -80,7 +82,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
          */
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
-                loginViewModel.socialLogin(SocialLoginRequest(SocialLoginType.NAVER,NaverIdLoginSDK.getAccessToken()!!))
+                issuedFcmToken {
+                    loginViewModel.socialLogin(SocialLoginRequest(SocialLoginType.NAVER,NaverIdLoginSDK.getAccessToken()!!,it))
+                }
             }
             override fun onFailure(httpStatus: Int, message: String) {
                 val errorCode = NaverIdLoginSDK.getLastErrorCode().code
@@ -92,6 +96,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             }
         }
         NaverIdLoginSDK.authenticate(this, oauthLoginCallback)
+    }
+
+    private fun issuedFcmToken(block :(fcmToken : String) -> Unit){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener{
+            if(it.isComplete){
+                block(it.result)
+            } else {
+                Toast.makeText(this,"로그인에 실패 했습니다.",Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 }

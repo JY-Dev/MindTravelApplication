@@ -21,7 +21,8 @@ class LoginRepository @Inject constructor(
     suspend fun socialLogin(socialLoginRequest: SocialLoginRequest): MemberLogin {
         val token = authApi.socialLogin(
             socialLoginRequest.socialLoginType.socialType,
-            "Bearer " + socialLoginRequest.accessToken
+            "Bearer " + socialLoginRequest.accessToken,
+            socialLoginRequest.fcmToken
         ).getData().toDomain()
         val member = memberApi.getMember(token.accessToken).getData(
             tokenRefreshManager::refreshToken
