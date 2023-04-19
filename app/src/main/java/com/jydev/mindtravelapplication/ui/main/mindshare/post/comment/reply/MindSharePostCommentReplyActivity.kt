@@ -50,14 +50,12 @@ class MindSharePostCommentReplyActivity : BaseActivity<ActivityMindSharePostComm
                 return
             }
         }
-        val postId = commentViewModel.postDetail.postId
         if(content.isEmpty()){
             Toast.makeText(this,"내용을 입력해주세요.",Toast.LENGTH_SHORT).show()
             return
         }
         val request = MindSharePostChildCommentRequest(
             content,
-            postId,
             tagMemberId,
             commentId
         )
