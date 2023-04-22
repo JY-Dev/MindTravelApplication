@@ -26,6 +26,7 @@ class MindSharePostCommentViewHolder(
             viewComment.nicknameTextView.text = item.member.nickname
             viewComment.creatorText.visibility = if(isPostCreator(item.member.id)) View.VISIBLE else View.INVISIBLE
             viewComment.editGroup.visibility = if(isCreator(item.member.id) && isEditMode) View.VISIBLE else View.INVISIBLE
+            viewComment.replyButton.visibility = if(isEditMode) View.VISIBLE else View.INVISIBLE
             viewComment.commentGroup.visibility = View.VISIBLE
             viewComment.deletedText.visibility = View.GONE
             viewComment.commentGroup.visibility = View.VISIBLE
@@ -50,6 +51,7 @@ class MindSharePostCommentViewHolder(
                         viewComment.deletedText.visibility = View.VISIBLE
                         viewComment.commentGroup.visibility =  View.INVISIBLE
                         viewComment.editGroup.visibility = View.INVISIBLE
+                        viewComment.replyButton.visibility = View.INVISIBLE
                     }
 
                 }
