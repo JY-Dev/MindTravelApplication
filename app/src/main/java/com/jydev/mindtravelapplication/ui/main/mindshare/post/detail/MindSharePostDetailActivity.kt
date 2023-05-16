@@ -1,12 +1,15 @@
 package com.jydev.mindtravelapplication.ui.main.mindshare.post.detail
 
+import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.jydev.mindtravelapplication.R
 import com.jydev.mindtravelapplication.base.BaseActivity
 import com.jydev.mindtravelapplication.databinding.ActivityMindSharePostDetailBinding
+import com.jydev.mindtravelapplication.fcm.data.MindShareFcmData
 import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.MindSharePostCommentActivity
 import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.MindSharePostCommentAdapter
 import com.jydev.mindtravelapplication.ui.main.mindshare.post.comment.MindSharePostCommentViewModel
@@ -82,6 +85,7 @@ class MindSharePostDetailActivity :
     }
 
     private fun setPostId() {
+        Log.d("포스트 진입","했음")
         val postId = intent.getLongExtra(POST_ID, viewModel.postId)
         if (postId == -1L) {
             Toast.makeText(this, "글 정보가 없습니다.", Toast.LENGTH_SHORT).show()
@@ -94,5 +98,13 @@ class MindSharePostDetailActivity :
         const val POST_ID = "post_id"
         const val POST_DETAIL = "POST_DETAIL"
         const val DATE_TIME_FORMAT = "yyyy.MM.dd. HH:mm"
+
+        fun getFcmIntent(context : Context,fcmData: MindShareFcmData?) : Intent{
+            return Intent(context,MindSharePostDetailActivity::class.java).apply {
+                fcmData?.let {
+                    putExtra(POST_ID,it.postId)
+                }
+            }
+        }
     }
 }

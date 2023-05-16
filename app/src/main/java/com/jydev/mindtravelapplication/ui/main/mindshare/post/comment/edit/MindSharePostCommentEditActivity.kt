@@ -38,6 +38,9 @@ class MindSharePostCommentEditActivity :
         editButton.setOnClickListener {
             editComment()
         }
+        backButton.setOnClickListener {
+            finish()
+        }
         commentTextView.text = intent.getStringExtra(CONTENT)
         contentEditTextView.setText(intent.getStringExtra(CONTENT))
     }

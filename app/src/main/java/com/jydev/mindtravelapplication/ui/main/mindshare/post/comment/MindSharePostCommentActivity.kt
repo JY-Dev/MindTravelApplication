@@ -52,6 +52,9 @@ class MindSharePostCommentActivity : BaseActivity<ActivityMindSharePostCommentBi
     }
 
     private fun ActivityMindSharePostCommentBinding.initView(){
+        backButton.setOnClickListener {
+            finish()
+        }
         gotoLikeButton.setOnClickListener {
             startActivity(
                 Intent(
