@@ -1,50 +1,33 @@
 package com.jydev.mindtravelapplication.fcm
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.util.Log
-import androidx.core.app.NotificationCompat
-import com.google.firebase.messaging.FirebaseMessagingService
-import com.google.firebase.messaging.RemoteMessage
-import com.jydev.mindtravelapplication.R
+import com.google.gson.Gson
+import com.jydev.mindtravelapplication.fcm.data.MindShareFcmData
+import com.jydev.mindtravelapplication.ui.main.mindshare.post.detail.MindSharePostDetailActivity
 
-class FcmService : FirebaseMessagingService() {
-    override fun onMessageReceived(message: RemoteMessage) {
-        message.notification?.let {
-            sendNotification(it.body ?:"Body 없음")
+enum class FcmService {
+    MIND_SHARE {
+        override val dataClass: Class<*>
+            get() = MindShareFcmData::class.java
+    };
+
+    fun getIntent(context: Context, payLoad: FcmPayLoad, jsonData: String): Intent {
+        val data = if (payLoad.isContainData) gson.fromJson(
+            jsonData,
+            payLoad.fcmService.dataClass
+        ) else null
+
+        return when (this) {
+            MIND_SHARE -> {
+                MindSharePostDetailActivity.getFcmIntent(context, data as? MindShareFcmData)
+            }
         }
     }
 
+    abstract val dataClass: Class<*>
 
-    override fun onNewToken(token: String) {
-        super.onNewToken(token)
-        Log.d("FCM TOKEN","FCM TOKEN : $token")
-    }
-
-    private fun sendNotification(messageBody: String) {
-        val intent = Intent()
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-        val channelId = "fcm_channel"
-        val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.clover)
-            .setContentTitle("테스트")
-            .setContentText(messageBody)
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        // Since android Oreo notification channel is needed.
-        val channel = NotificationChannel(
-            channelId,
-            "Channel human readable title",
-            NotificationManager.IMPORTANCE_DEFAULT
-        )
-        notificationManager.createNotificationChannel(channel)
-
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
+    companion object {
+        val gson = Gson()
     }
 }
