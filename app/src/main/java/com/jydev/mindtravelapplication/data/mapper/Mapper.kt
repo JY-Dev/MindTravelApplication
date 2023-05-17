@@ -69,3 +69,11 @@ fun MindSharePostChildCommentResponse.toDomain() : MindSharePostChildComment {
 fun MindSharePostLikeResponse.toDomain(): MindSharePostLike {
     return MindSharePostLike(postId, member.toDomain(), LocalDateTime.parse(createdDate))
 }
+
+fun StoreItemResponse.toDomain() : StoreItem {
+    return StoreItem(price,quantity,item.toDomain())
+}
+
+fun ItemResponse.toDomain() : Item {
+    return Item(id, type)
+}

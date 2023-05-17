@@ -3,10 +3,10 @@
     <item android:id="@+id/action_travel"
         android:title="여행하기"
         android:icon="@drawable/ic_travel" />
-    <item android:id="@+id/action_01"
-        android:title="여행하기"
-        android:icon="@drawable/ic_travel" />
-    <item android:id="@+id/action_02"
+    <item android:id="@+id/action_consulting"
+        android:title="상담하기"
+        android:icon="@drawable/chat" />
+    <item android:id="@+id/action_community"
         android:title="마음공유"
         android:icon="@drawable/ic_community" />
 </menu>

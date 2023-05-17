@@ -23,7 +23,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         navigation.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.action_travel -> viewPager.currentItem = 0
-                else -> viewPager.currentItem = 1
+                R.id.action_consulting -> viewPager.currentItem = 1
+                else -> viewPager.currentItem = 2
             }
             true
         }

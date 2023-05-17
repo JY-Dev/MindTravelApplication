@@ -1,9 +1,6 @@
 package com.jydev.mindtravelapplication.di
 
-import com.jydev.mindtravelapplication.data.api.AuthApi
-import com.jydev.mindtravelapplication.data.api.MemberApi
-import com.jydev.mindtravelapplication.data.api.MindApi
-import com.jydev.mindtravelapplication.data.api.TestApi
+import com.jydev.mindtravelapplication.data.api.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,5 +35,11 @@ object ApiModule {
     @Singleton
     fun testApi(retrofit: Retrofit) : TestApi {
         return retrofit.create(TestApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun storeApi(retrofit: Retrofit) : StoreApi {
+        return retrofit.create(StoreApi::class.java)
     }
 }
